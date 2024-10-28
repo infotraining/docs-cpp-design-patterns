@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Foundations of SOLID Object-Oriented Programming &#8212; Design Patterns in C++</title>
+    <title>Foundations of Object-Oriented Programming &#8212; Design Patterns in C++</title>
   
   
   
@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Foundations of SOLID Object-Oriented Programming</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Foundations of Object-Oriented Programming</a></li>
 </ul>
 
     </div>
@@ -355,7 +355,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Foundations of SOLID Object-Oriented Programming</h1>
+    <h1>Foundations of Object-Oriented Programming</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -375,6 +375,23 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-oop-techniques">Basic OOP Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-of-implementation">Inheritance of Implementation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-of-interface">Inheritance of Interface</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-pros-and-cons">Inheritance - Pros and Cons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition">Composition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-pros-and-cons">Composition - Pros and Cons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delegation">Delegation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#delegation-pros-and-cons">Delegation - Pros and Cons</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -386,8 +403,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="foundations-of-solid-object-oriented-programming">
-<h1>Foundations of SOLID Object-Oriented Programming<a class="headerlink" href="#foundations-of-solid-object-oriented-programming" title="Permalink to this heading">#</a></h1>
+  <section id="foundations-of-object-oriented-programming">
+<h1>Foundations of Object-Oriented Programming<a class="headerlink" href="#foundations-of-object-oriented-programming" title="Permalink to this heading">#</a></h1>
 <section id="four-tenets-of-object-oriented-programming">
 <h2>Four tenets of object-oriented programming<a class="headerlink" href="#four-tenets-of-object-oriented-programming" title="Permalink to this heading">#</a></h2>
 <p>Object-oriented programming (OOP) is a programming paradigm that uses “objects” to design applications and computer programs.</p>
@@ -446,6 +463,266 @@ document.write(`
 <p>Class that contains at least one pure virtual function is called an abstract class.</p>
 <p>Class that implements all the pure virtual functions of an abstract class is called a <strong>concrete class</strong> and can be instantiated.</p>
 <p><img alt="Abstract Class" src="_images/abstract-class.png" /></p>
+</section>
+</section>
+</section>
+<section id="basic-oop-techniques">
+<h2>Basic OOP Techniques<a class="headerlink" href="#basic-oop-techniques" title="Permalink to this heading">#</a></h2>
+<section id="inheritance">
+<h3>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h3>
+<p>Inheritance is a mechanism in which one class acquires the properties and behavior of another class. It allows to define a new class based on an existing class.</p>
+<p>One can distinguish between two types of inheritance:</p>
+<ul class="simple">
+<li><p><strong>Inheritance of implementation</strong> (<em>code reuse</em>) and</p></li>
+<li><p><strong>Inheritance of interface</strong> (<em>polymorphism</em>).</p></li>
+</ul>
+<section id="inheritance-of-implementation">
+<h4>Inheritance of Implementation<a class="headerlink" href="#inheritance-of-implementation" title="Permalink to this heading">#</a></h4>
+<p>Inheritance of implementation is a technique that allows to reuse the code of an existing class. It allows to define a new class that inherits the attributes and methods (its implementation) of an existing class.</p>
+<p>In C++ inheritance of implementation can be achieved using <strong>private inheritance</strong>.</p>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Set</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">BaseImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">BaseImpl</span><span class="o">::</span><span class="n">BaseImpl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">BaseImpl</span><span class="o">::</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">next</span><span class="p">(</span><span class="n">BaseImpl</span><span class="o">::</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">index</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">add_item</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BaseImpl</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">second</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">remove_item</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BaseImpl</span><span class="o">::</span><span class="n">erase</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="inheritance-of-interface">
+<h4>Inheritance of Interface<a class="headerlink" href="#inheritance-of-interface" title="Permalink to this heading">#</a></h4>
+<p>Defines when object of one type (<em>derived type</em>) can be used in place of an object of another type (<em>base type</em>).</p>
+<p>In C++ inheritance of interface can be achieved using <strong>public inheritance from a class that has only abstract methods</strong>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">draw</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Shape</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Square</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Shape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect_</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">rect_</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">rect_</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">draw</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">rect_</span><span class="p">.</span><span class="n">draw</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>When the clients are using a reference or a pointer to the interface class they are unaware of the actual implementation of the object. This allows to change the implementation without affecting the client.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">draw_shapes</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">shape</span><span class="o">-&gt;</span><span class="n">draw</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="inheritance-pros-and-cons">
+<h4>Inheritance - Pros and Cons<a class="headerlink" href="#inheritance-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<p><strong>Pros:</strong></p>
+<ul class="simple">
+<li><p><strong>Code Reusability</strong>: Inheritance allows to reuse the code of an existing class.</p></li>
+<li><p><strong>Polymorphism</strong>: Inheritance of interfaces allows to define a polymorphic scenario for a group of classes.</p></li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="simple">
+<li><p><strong>Can Breaks Encapsulation</strong>: Inheritance from classes with implementation creates a tight coupling between the base class and the derived class. It is especially problematic when the base class has <strong>protected</strong> data members. It reveals the internal implementation of the base class (breaks encapsulation) to the derived class. Any change in the base class can break the derived classes.</p></li>
+<li><p><strong>Static Behavior</strong>: Inheritance is a static mechanism. The behavior of the derived class is determined at compile time. As a result it is not possible (or at least very difficult) to change the behavior of the derived class at runtime.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><em><strong>Prefer interface inheritance over implementation inheritance!!!</strong></em></p>
+</div>
+</section>
+</section>
+<section id="composition">
+<h3>Composition<a class="headerlink" href="#composition" title="Permalink to this heading">#</a></h3>
+<p>Composition is a technique in which one class contains an object of another class. It allows to create complex types by combining objects of other types.</p>
+<p>Composition is a “has-a” relationship between two classes.</p>
+<p>Example:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RecentlyUsedList</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list_</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">RecentlyUsedList</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">list_</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">recent</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<section id="composition-pros-and-cons">
+<h4>Composition - Pros and Cons<a class="headerlink" href="#composition-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<p><strong>Pros:</strong></p>
+<ul class="simple">
+<li><p><strong>Code Reusability</strong>: Composition allows to reuse the code of an existing class.</p></li>
+<li><p><strong>Encapsulation</strong>: Using composition one can only use the public interface of the composed class. It hides the internal implementation of the composed class.</p></li>
+<li><p><strong>Flexibility</strong>: Composition is a dynamic mechanism. References or pointers to the composed objects can be set at run-time. It allows to set or change the behavior of the object at runtime.</p></li>
+<li><p><strong>Cohesion</strong> Composition allows to create classes that have a single responsibility. It is easier to maintain and test such classes.</p></li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="simple">
+<li><p><strong>Complexity</strong>: Composition can lead to a more complex design. It requires to manage the lifetime of the composed objects.</p></li>
+<li><p><strong>Tight Coupling</strong>: When composition uses concrete classes instead of the interfaces it can lead to a tight coupling between the composed objects. It can make the code harder to maintain.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Prefer composition over inheritance!!!</strong></p>
+</div>
+</section>
+</section>
+<section id="delegation">
+<h3>Delegation<a class="headerlink" href="#delegation" title="Permalink to this heading">#</a></h3>
+<p>Delegation is a technique in which one object forwards a method call to another object. It allows to reuse the code of an existing class. It is a form of composition, however in static typed languages like C++ it is requires also usage of inheritance.</p>
+<p>In delegation there are two objects involved in the process of handling a request:</p>
+<ul class="simple">
+<li><p><strong>Delegator</strong>: The object that receives the request from a client. Instead of handling the request itself, it forwards the request to the delegate object.</p></li>
+<li><p><strong>Delegate</strong>: The object that implements handling the request. It is the object that actually performs the request. It encapsulates and provides the behavior that is required by the delegator.</p></li>
+</ul>
+<p>The following example compares the delegation and inheritance techniques.</p>
+<ul class="simple">
+<li><p>Code that uses inheritance:</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TextParagraph</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">text_</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color_</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">text_</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// other methods...</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RightAlignedTextParagraph</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">TextParagraph</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="n">line_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">text_</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">text_</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CenteredAlignedTextParagraph</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">TextParagraph</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">((</span><span class="n">line_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">text_</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">text_</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Code that uses delegation:</p>
+<p><code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> is an interface that defines the behavior of the classes that control the alignment of the text. The instance of <code class="docutils literal notranslate"><span class="pre">TextParagraph</span></code> gets the <code class="docutils literal notranslate"><span class="pre">render()</span></code> request but instead to implement the alignment by itself it delegates the request to the <code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> object. Alignment can be set and even changed at runtime.</p>
+</li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TextAlignment</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">aligned_text</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Alignment</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LeftAlignment</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">TextAlignment</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">aligned_text</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RightAlignment</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">TextAlignment</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">aligned_text</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">line_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CenterAlignment</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">TextAlignment</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">aligned_text</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">line_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">padding</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">padding</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TextParagraph</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">text_</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">color_</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TextAlignment</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alignment_</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">alignment_</span><span class="o">-&gt;</span><span class="n">aligned_text</span><span class="p">(</span><span class="n">text_</span><span class="p">,</span><span class="w"> </span><span class="n">line_width</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set_alignment</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Alignment</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alignment</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">alignment_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">alignment</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// other methods...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<section id="delegation-pros-and-cons">
+<h4>Delegation - Pros and Cons<a class="headerlink" href="#delegation-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<p><strong>Pros:</strong></p>
+<ul class="simple">
+<li><p><strong>Code Reusability</strong>: Delegation allows to reuse the code of an existing class.</p></li>
+<li><p><strong>Encapsulation</strong>: Using delegation one can only use the public interface of the delegate class. It hides the internal implementation of the delegate class.</p></li>
+<li><p><strong>Loose Coupling</strong>: Delegation allows to create a loose coupling between the delegator and the delegate objects. It allows to change the behavior of the delegator without affecting the delegate object.</p></li>
+<li><p><strong>Flexibility</strong>: Delegation is a dynamic mechanism. References or pointers to the delegate objects can be set at run-time. It allows to set or change the behavior of the object at runtime.</p></li>
+<li><p><strong>Cohesion</strong> Delegation allows to create classes that have a single responsibility. It is easier to maintain and test such classes.</p></li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="simple">
+<li><p><strong>Complexity</strong>: Delegation can lead to a more complex design. It requires to manage the lifetime of the delegate objects.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Delegation is more powerful way of introducing new behavior to the existing classes than inheritance!!!</strong></p>
+</div>
 </section>
 </section>
 </section>
@@ -511,6 +788,23 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface">Interface</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-class">Abstract Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-oop-techniques">Basic OOP Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-of-implementation">Inheritance of Implementation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-of-interface">Inheritance of Interface</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-pros-and-cons">Inheritance - Pros and Cons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composition">Composition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-pros-and-cons">Composition - Pros and Cons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delegation">Delegation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#delegation-pros-and-cons">Delegation - Pros and Cons</a></li>
 </ul>
 </li>
 </ul>
