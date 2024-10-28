@@ -1,4 +1,4 @@
-# Foundations of SOLID Object-Oriented Programming
+# Foundations of Object-Oriented Programming
 
 ## Four tenets of object-oriented programming
 
@@ -65,3 +65,271 @@ Class that contains at least one pure virtual function is called an abstract cla
 Class that implements all the pure virtual functions of an abstract class is called a **concrete class** and can be instantiated.
 
 ![Abstract Class](img/abstract-class.png)
+
+## Basic OOP Techniques
+
+### Inheritance
+
+Inheritance is a mechanism in which one class acquires the properties and behavior of another class. It allows to define a new class based on an existing class.
+
+One can distinguish between two types of inheritance: 
+
+* **Inheritance of implementation** (*code reuse*) and 
+* **Inheritance of interface** (*polymorphism*).
+
+#### Inheritance of Implementation
+
+Inheritance of implementation is a technique that allows to reuse the code of an existing class. It allows to define a new class that inherits the attributes and methods (its implementation) of an existing class.
+
+In C++ inheritance of implementation can be achieved using **private inheritance**.
+
+Example:
+
+```cpp
+class Set : private std::set<int> {
+    using BaseImpl = std::set<int>;
+
+public:
+    using BaseImpl::BaseImpl;
+
+    size_t size() const { return BaseImpl::size(); }
+
+    const int& operator[](size_t index) const 
+    {
+        return *std::next(BaseImpl::begin(), index);
+    }
+
+    bool add_item(int value) 
+    {
+        return BaseImpl::insert(value).second;
+    }
+
+    bool remove_item(int value) 
+    {
+        return BaseImpl::erase(value) > 0;
+    }
+};
+```
+
+#### Inheritance of Interface
+
+Defines when object of one type (*derived type*) can be used in place of an object of another type (*base type*).
+
+In C++ inheritance of interface can be achieved using **public inheritance from a class that has only abstract methods**.
+
+```c++
+class Shape
+{
+public:
+    virtual move(int dx, int dy) = 0
+    virtual void draw() const = 0;
+    virtual ~Shape() = default;
+};
+
+class Square : public Shape
+{
+    Rectangle rect_;
+public:
+    Square(int x, int y, int size) : rect_(x, y, size, size) {}
+    void move(int dx, int dy) override { rect_.move(dx, dy); }
+    void draw() const override { rect_.draw(); }
+};
+```
+
+When the clients are using a reference or a pointer to the interface class they are unaware of the actual implementation of the object. This allows to change the implementation without affecting the client.
+
+```c++
+void draw_shapes(const std::vector<std::unique_ptr<Shape>>& shapes)
+{
+    for (const auto& shape : shapes)
+    {
+        shape->draw();
+    }
+}
+```
+
+#### Inheritance - Pros and Cons
+
+**Pros:**
+
+* **Code Reusability**: Inheritance allows to reuse the code of an existing class.
+* **Polymorphism**: Inheritance of interfaces allows to define a polymorphic scenario for a group of classes.
+
+**Cons:**
+
+* **Can Breaks Encapsulation**: Inheritance from classes with implementation creates a tight coupling between the base class and the derived class. It is especially problematic when the base class has **protected** data members. It reveals the internal implementation of the base class (breaks encapsulation) to the derived class. Any change in the base class can break the derived classes.
+
+* **Static Behavior**: Inheritance is a static mechanism. The behavior of the derived class is determined at compile time. As a result it is not possible (or at least very difficult) to change the behavior of the derived class at runtime.
+
+```{important}
+***Prefer interface inheritance over implementation inheritance!!!***
+```
+
+### Composition
+
+Composition is a technique in which one class contains an object of another class. It allows to create complex types by combining objects of other types.
+
+Composition is a "has-a" relationship between two classes.
+
+Example:
+
+```c++
+class RecentlyUsedList
+{
+    std::deque<std::string> list_;
+public:
+    RecentlyUsedList() = default;
+
+    void add_item(std::string value)
+    {
+        list_.push_front(std::move(value));
+    }
+
+    const int& recent() const
+    {
+        return list_.front();
+    }
+};
+```
+
+#### Composition - Pros and Cons
+
+**Pros:**
+
+* **Code Reusability**: Composition allows to reuse the code of an existing class.
+* **Encapsulation**: Using composition one can only use the public interface of the composed class. It hides the internal implementation of the composed class.
+* **Flexibility**: Composition is a dynamic mechanism. References or pointers to the composed objects can be set at run-time. It allows to set or change the behavior of the object at runtime.
+* **Cohesion** Composition allows to create classes that have a single responsibility. It is easier to maintain and test such classes.
+
+**Cons:**
+
+* **Complexity**: Composition can lead to a more complex design. It requires to manage the lifetime of the composed objects.
+* **Tight Coupling**: When composition uses concrete classes instead of the interfaces it can lead to a tight coupling between the composed objects. It can make the code harder to maintain.
+
+```{important}
+**Prefer composition over inheritance!!!**
+```
+
+### Delegation
+
+Delegation is a technique in which one object forwards a method call to another object. It allows to reuse the code of an existing class. It is a form of composition, however in static typed languages like C++ it is requires also usage of inheritance.
+
+In delegation there are two objects involved in the process of handling a request:
+
+* **Delegator**: The object that receives the request from a client. Instead of handling the request itself, it forwards the request to the delegate object.
+* **Delegate**: The object that implements handling the request. It is the object that actually performs the request. It encapsulates and provides the behavior that is required by the delegator.
+
+The following example compares the delegation and inheritance techniques.
+
+* Code that uses inheritance:
+
+```c++
+class TextParagraph
+{
+    std::string text_;
+    Color color_;
+public:
+    virtual void render(size_t line_width) const
+    {
+        std::cout << text_ << std::endl;
+    }
+
+    // other methods...
+};
+
+class RightAlignedTextParagraph : public TextParagraph
+{
+public:
+    void render(int line_width) const override
+    {
+        std::cout << std::setw(line_width - text_.size()) << text_ << std::endl;
+    }
+};
+
+class CenteredAlignedTextParagraph : public TextParagraph
+{
+public:
+    void render(size_t line_width) const override
+    {
+        std::cout << std::setw((line_width - text_.size()) / 2) << text_ << std::endl;
+    }
+};
+```
+
+* Code that uses delegation:
+
+    `TextAlignment` is an interface that defines the behavior of the classes that control the alignment of the text. The instance of `TextParagraph` gets the `render()` request but instead to implement the alignment by itself it delegates the request to the `TextAlignment` object. Alignment can be set and even changed at runtime.
+
+```c++
+class TextAlignment
+{
+public:
+    virtual std::string aligned_text(const std::string& text, size_t line_width) const = 0;
+    virtual ~Alignment() = default;
+};
+
+class LeftAlignment : public TextAlignment
+{
+public:
+    std::string aligned_text(const std::string& text, size_t line_width) const override
+    {
+        return text;
+    }
+};
+
+class RightAlignment : public TextAlignment
+{
+public:
+    std::string aligned_text(const std::string& text, size_t line_width) const override
+    {
+        return std::string(line_width - text.size(), ' ') + text;
+    }
+};
+
+class CenterAlignment : public TextAlignment
+{
+public:
+    std::string aligned_text(const std::string& text, size_t line_width) const override
+    {
+        size_t padding = (line_width - text.size()) / 2;
+        return std::string(padding) + text + std::string(padding);
+    }
+};
+
+class TextParagraph
+{
+    std::string text_;
+    Color color_;
+    std::unique_ptr<TextAlignment> alignment_;
+public:
+    void render(size_t line_width) const
+    {
+        std::cout << alignment_->aligned_text(text_, line_width) << std::endl;
+    }
+
+    void set_alignment(std::unique_ptr<Alignment> alignment)
+    {
+        alignment_ = std::move(alignment);
+    }
+
+    // other methods...
+};
+```
+
+#### Delegation - Pros and Cons
+
+**Pros:**
+
+* **Code Reusability**: Delegation allows to reuse the code of an existing class.
+* **Encapsulation**: Using delegation one can only use the public interface of the delegate class. It hides the internal implementation of the delegate class.
+* **Loose Coupling**: Delegation allows to create a loose coupling between the delegator and the delegate objects. It allows to change the behavior of the delegator without affecting the delegate object.
+* **Flexibility**: Delegation is a dynamic mechanism. References or pointers to the delegate objects can be set at run-time. It allows to set or change the behavior of the object at runtime.
+* **Cohesion** Delegation allows to create classes that have a single responsibility. It is easier to maintain and test such classes.
+
+**Cons:**
+
+* **Complexity**: Delegation can lead to a more complex design. It requires to manage the lifetime of the delegate objects.
+
+```{important}
+**Delegation is more powerful way of introducing new behavior to the existing classes than inheritance!!!**
+```
