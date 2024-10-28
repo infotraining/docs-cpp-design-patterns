@@ -1,3 +1,3 @@
-# Szkolenie
+# Design Patterns in C++
 
-Materiały do szkolenia [Test-Driven Development w C++](https://www.infotraining.pl/szkolenie/c-plus-plus/tdd)
+E-book for a training [Design Patterns in C++](https://www.infotraining.pl/szkolenie/c-plus-plus/wzorce-projektowe)
