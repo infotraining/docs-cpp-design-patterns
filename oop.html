@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Four tenets of object-oriented programming &#8212; Design Patterns in C++</title>
+    <title>Foundations of SOLID Object-Oriented Programming &#8212; Design Patterns in C++</title>
   
   
   
@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Four tenets of object-oriented programming</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Foundations of SOLID Object-Oriented Programming</a></li>
 </ul>
 
     </div>
@@ -342,7 +342,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -353,11 +355,28 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Four tenets of object-oriented programming</h1>
+    <h1>Foundations of SOLID Object-Oriented Programming</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-tenets-of-object-oriented-programming">Four tenets of object-oriented programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-interface-class">Object - Interface - Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object">Object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface">Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-class">Abstract Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -367,32 +386,69 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="four-tenets-of-object-oriented-programming">
-<h1>Four tenets of object-oriented programming<a class="headerlink" href="#four-tenets-of-object-oriented-programming" title="Permalink to this heading">#</a></h1>
+  <section id="foundations-of-solid-object-oriented-programming">
+<h1>Foundations of SOLID Object-Oriented Programming<a class="headerlink" href="#foundations-of-solid-object-oriented-programming" title="Permalink to this heading">#</a></h1>
+<section id="four-tenets-of-object-oriented-programming">
+<h2>Four tenets of object-oriented programming<a class="headerlink" href="#four-tenets-of-object-oriented-programming" title="Permalink to this heading">#</a></h2>
 <p>Object-oriented programming (OOP) is a programming paradigm that uses “objects” to design applications and computer programs.</p>
 <p>It utilizes several techniques to design and develop software. The four major principles of object-oriented programming are:</p>
-<ol class="arabic simple">
-<li><p>Abstraction</p>
+<ol class="arabic">
+<li><p><strong>Abstraction</strong></p>
 <ul class="simple">
 <li><p>Abstraction is the concept of hiding the complex implementation details and showing only the necessary features of the object. It helps to reduce programming complexity and effort.</p></li>
 </ul>
 </li>
-<li><p>Encapsulation</p>
+<li><p><strong>Encapsulation</strong></p>
 <ul class="simple">
-<li><p>Encapsulation (aka information hiding) is the process of bundling the <strong>data</strong> (variables) and the <strong>methods</strong> (functions) that operate on the data into a single unit called a class. All internal details of the class should be hidden from the outside world, and only the necessary interface that allows to operate on an object is exposed to the user.</p></li>
+<li><p>Encapsulation (aka <em>Information Hiding</em>) is the process of bundling the <strong>data</strong> (variables) and the <strong>methods</strong> (functions) that operate on the data into a single unit called a class. All internal details of the class implementation are hidden from the outside world, and only the necessary interface that allows to operate on an object is exposed to the user.</p></li>
 </ul>
 </li>
-<li><p>Polymorphism</p>
+<li><p><strong>Polymorphism</strong></p>
 <ul class="simple">
-<li><p>It allows to perform a single action in different ways. In other words, polymorphism allows to define one interface and have multiple implementations.</p></li>
+<li><p>It allows to perform a single action in different ways. In other words, polymorphism allows to define one interface and have multiple implementations. Objects that have the same interface can be used interchangeably.</p></li>
 </ul>
 </li>
-<li><p>Code Reusability: Composition &amp; Inheritance</p>
+<li><p><strong>Code Reusability: Composition &amp; Inheritance</strong></p>
+<p>Composition and inheritance are two ways to achieve code reusability in object-oriented programming.</p>
 <ul class="simple">
-<li><p>Composition and inheritance are two ways to achieve code reusability in object-oriented programming.</p></li>
+<li><p><strong>Composition</strong> is a “has-a” relationship between two classes. It allows creating complex types by combining objects of other types.</p></li>
+<li><p><strong>Inheritance</strong> is an “is-a” relationship between two classes. It allows creating a new class that inherits attributes and methods from an existing class.</p></li>
 </ul>
 </li>
 </ol>
+</section>
+<section id="object-interface-class">
+<h2>Object - Interface - Class<a class="headerlink" href="#object-interface-class" title="Permalink to this heading">#</a></h2>
+<section id="object">
+<h3>Object<a class="headerlink" href="#object" title="Permalink to this heading">#</a></h3>
+<p>An object is a real-world entity that has a state and behavior. It can be a physical entity or a conceptual entity. An object has three main characteristics:</p>
+<ol class="arabic simple">
+<li><p><strong>State</strong>: It represents the data (attributes) of an object.</p></li>
+<li><p><strong>Behavior</strong>: It represents the methods (functions) that operate on the object’s state.</p></li>
+<li><p><strong>Identity</strong>: It gives a unique name to an object and enables one object to interact with another object.</p></li>
+</ol>
+<p>In object oriented software objects communicate with each other using methods.</p>
+</section>
+<section id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h3>
+<p>An interface is a public contract that defines the methods that a class must implement. It specifies what a class must do but not how it does it. Interfaces are used to define the behavior of an object.</p>
+<p>Interface is separated from the objects implementation. Many objects that have the same interface can vary in their implementation.</p>
+</section>
+<section id="class">
+<h3>Class<a class="headerlink" href="#class" title="Permalink to this heading">#</a></h3>
+<p>Class defines the implementation for an object. It is a blueprint for creating objects. It defines the attributes and methods that an object will have.</p>
+<p>Class allows to instantiate objects. An object is an instance of a class.</p>
+<section id="abstract-class">
+<h4>Abstract Class<a class="headerlink" href="#abstract-class" title="Permalink to this heading">#</a></h4>
+<p>An abstract class is a class that cannot be instantiated.</p>
+<p>It is used to define a common interface for all the subclasses. It allows to define <strong>abstract methods</strong> that must be implemented by the subclasses.</p>
+<p>Abstract methods are methods that are declared in the abstract class but do not have an implementation. In C++ they are declared as <strong>pure virtual functions</strong>.</p>
+<p>Class that contains at least one pure virtual function is called an abstract class.</p>
+<p>Class that implements all the pure virtual functions of an abstract class is called a <strong>concrete class</strong> and can be instantiated.</p>
+<p><img alt="Abstract Class" src="_images/abstract-class.png" /></p>
+</section>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -440,6 +496,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-tenets-of-object-oriented-programming">Four tenets of object-oriented programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-interface-class">Object - Interface - Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object">Object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface">Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-class">Abstract Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
