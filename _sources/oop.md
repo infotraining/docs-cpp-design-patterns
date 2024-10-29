@@ -178,6 +178,220 @@ public:
 };
 ```
 
+## Polymorphism
+
+Polymorphism is a feature of object-oriented programming that allows to perform a single action in different ways. It allows to define one interface and have multiple implementations. Objects that have the same interface can be used interchangeably.
+
+In C++ polymorphism can be achieved in many ways:
+
+* using **virtual functions** and **inheritance** - it is so called **run-time polymorphism** or **dynamic polymorphism**,
+* using **templates** - it is so called **compile-time polymorphism** or **static polymorphism**,
+* using **polymorphic wrappers** - this is form of dynamic polymorphism and it is also called as **duck typing**.
+
+### Dynamic Polymorphism
+
+Dynamic polymorphism in C++ is achieved by using **virtual functions** and **inheritance**. It allows to define a common interface for a group of classes. Virtual functions from a base class can be overridden by the derived classes.
+
+When a pointer or reference to a base class is used to refer to an object of derived class, the function call is resolved at runtime (via **virtual-table**). It allows to change the behavior required by some client at runtime.
+
+Example:
+
+```c++
+class Formatter
+{
+public:
+    virtual std::string format(const std::string& data) = 0;
+    virtual ~Formatter() = default;
+};
+
+class Logger
+{
+    std::unique_ptr<Formatter> formatter_;
+
+public:
+    Logger(std::unique_ptr<Formatter> formatter)
+        : formatter_{std::move(formatter)}
+    { }
+
+    void log(const std::string& data)
+    {
+        std::cout << "LOG: " << formatter_->format(data) << '\n';
+    }
+};
+```
+
+`Formatter` is an interface required by the `Logger` class. It defines a method `format()` that must be implemented by the derived classes. The `Logger` class uses the `Formatter` interface to format the data before logging it.
+
+Now we can define concrete classes that implement the `Formatter` interface:
+
+```c++
+class UpperCaseFormatter : public Formatter {
+public:
+    std::string format(const std::string& data) override {
+        std::string transformed_data{data};
+        std::transform(data.begin(), data.end(), transformed_data.begin(), 
+            [](char c) { return std::toupper(c); });
+        return transformed_data;
+    }
+};
+
+class LowerCaseFormatter : public Formatter {
+public:
+    std::string format(const std::string& data) override {
+        std::string transformed_data{data};
+        std::transform(data.begin(), data.end(), transformed_data.begin(), 
+            [](char c) { return std::tolower(c); });
+        return transformed_data;
+    }
+};
+```
+
+Now we can use the `Logger` class with different formatters:
+
+```c++
+Logger logger{std::make_unique<UpperCaseFormatter>()};
+logger.log("Hello, World!");
+
+logger = Logger{std::make_unique<LowerCaseFormatter>()};
+logger.log("Hello, World!");
+```
+
+Polymorphism in this scenario allows to change the behavior of the `Logger` class at runtime. The `Logger` class is not dependent on the concrete implementation of the `Formatter` class. It uses the `Formatter` interface to format the data.
+
+#### Dynamic Polymorphism - Pros and Cons
+
+**Pros:**
+
+* **Flexibility**: Dynamic polymorphism allows to change the behavior of the object at runtime. It allows to define a common interface for a group of classes and use them interchangeably.
+
+* **Loose Coupling**: Dynamic polymorphism allows to create a loose coupling between the base class and the derived classes. It allows to change the behavior of the base class without affecting the derived classes.
+
+**Cons:**
+
+* **Performance Overhead**: Dynamic polymorphism has a performance overhead. It requires to resolve the function calls at runtime. It uses **virtual-table** to resolve the function calls.
+
+* **Memory Overhead**: Dynamic polymorphism requires to store additional information about the virtual functions. It requires to store a pointer to the virtual-table in each object.
+
+* **Reference Semantics**: Dynamic polymorphism requires to use pointers or references to the base class. It can lead to a more complex code than code that uses *value semantics*. Often we need to dynamically allocate memory for the objects and use smart pointers to manage their lifetimes.
+
+* **Requires Inheritance**: Dynamic polymorphism requires to use inheritance. It creates strong relationship between types. It can lead to a more complex design.
+
+### Static Polymorphism
+
+Static polymorphism in C++ is achieved by using **templates**. When we pass a type with an interface required by the client as a template parameter, the client can use the type as if it was a polymorphic object. It allows to set the behavior of the object at compile time.
+
+Example of a template class that uses a type that provides a `format()` method as a template parameter:
+
+```c++
+template <typename TFormatter = UpperCaseFormatter>
+class Logger
+{
+    TFormatter formatter_;
+
+public:
+    Logger() = default;
+
+    Logger(TFormatter formatter)
+        : formatter_(std::move(formatter))
+    {
+    }
+
+    void log(const std::string& message)
+    {
+        std::cout << formatter_.format(message) << std::endl;
+    }
+};
+```
+
+Now we can define concrete classes that provide the `format()` method:
+
+```c++
+struct UpperCaseFormatter
+{
+    std::string format(const std::string& message) const
+    {
+        std::string result = message;
+        std::transform(result.begin(), result.end(),
+            result.begin(), [](char c) { return std::toupper(c); });
+        return result;
+    }
+};
+
+struct CapitalizeFormatter
+{
+    std::string format(const std::string& message) const
+    {
+        std::string result = message;
+        result[0] = std::toupper(result[0]);
+        return result;
+    }
+};
+```
+
+Notice that both classes provide the `format()` method which is not virtual. There is no inheritance from a common base class. The `Logger` class uses the `format()` method provided by the template parameter.
+
+Now we can parametrize the `Logger` class with different formatters at compile time:
+
+```c++
+Logger logger_1{UpperCaseFormatter{}};
+logger_1.log("Hello, World!");
+
+Logger<CapitalizeFormatter> logger2;
+logger2.log("hello, world!");
+```
+
+````{tip}
+In C++20 static polymorphism can be even more powerful with the introduction of **concepts**. Concepts allow to define constraints on template parameters. We can define concept that requires a type to provide a specific interface. It will allow to formalize the interfaces that is required by clients and provide better error messages when the requirements are not met.
+
+```cpp
+template <typename T>
+concept Formatter = requires(T formatter, const std::string& message)
+{
+    { formatter.format(message) } -> std::same_as<std::string>;
+};
+
+template <Formatter TFormatter>
+class Logger
+{
+    TFormatter formatter_;
+
+public:
+    Logger() = default;
+
+    Logger(TFormatter formatter)
+        : formatter_(std::move(formatter))
+    {
+    }
+
+    void log(const std::string& message)
+    {
+        std::cout << formatter_.format(message) << std::endl;
+    }
+};
+```
+
+````
+
+#### Static Polymorphism - Pros and Cons
+
+**Pros:**
+
+* **Performance**: Static polymorphism has no performance overhead. The function calls are resolved at compile time. It allows to achieve better performance than dynamic polymorphism.
+
+* **Memory**: Static polymorphism requires no additional memory overhead. It does not require to store a pointer to the virtual-table in each object.
+
+* **Value Semantics**: Static polymorphism allows to use value semantics. It allows to create objects on the stack and avoid dynamic memory allocation.
+
+* **No Inheritance**: Static polymorphism does not require to use inheritance. It allows to create a more flexible design.
+
+**Cons:**
+
+* **Compile Time**: Static polymorphism requires to set the behavior of the object at compile time. It does not allow to change the behavior of the object at runtime.
+
+### Polymorphic Wrappers
+
+```TODO: In the future```
+
 ## Basic OOP Techniques
 
 ### Inheritance
