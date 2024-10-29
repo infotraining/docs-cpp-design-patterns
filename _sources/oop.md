@@ -368,9 +368,19 @@ public:
 };
 ```
 
+UML diagram for the code above:
+
+```{image} img/delegation-before.svg
+:alt: Inheritance
+:width: 650px
+:align: center
+```
+
 * Code that uses delegation:
 
     `TextAlignment` is an interface that defines the behavior of the classes that control the alignment of the text. The instance of `TextParagraph` gets the `render()` request but instead to implement the alignment by itself it delegates the request to the `TextAlignment` object. Alignment can be set and even changed at runtime.
+
+![Delegation](img/delegation-after.png)
 
 ```c++
 class TextAlignment

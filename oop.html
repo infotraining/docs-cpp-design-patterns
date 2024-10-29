@@ -748,11 +748,14 @@ document.write(`
 <span class="p">};</span>
 </pre></div>
 </div>
+<p>UML diagram for the code above:</p>
+<a class="reference internal image-reference" href="_images/delegation-before.svg"><img alt="Inheritance" class="align-center" src="_images/delegation-before.svg" width="650px" /></a>
 <ul>
 <li><p>Code that uses delegation:</p>
 <p><code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> is an interface that defines the behavior of the classes that control the alignment of the text. The instance of <code class="docutils literal notranslate"><span class="pre">TextParagraph</span></code> gets the <code class="docutils literal notranslate"><span class="pre">render()</span></code> request but instead to implement the alignment by itself it delegates the request to the <code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> object. Alignment can be set and even changed at runtime.</p>
 </li>
 </ul>
+<p><img alt="Delegation" src="_images/delegation-after.png" /></p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TextAlignment</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
