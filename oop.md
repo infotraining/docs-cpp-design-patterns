@@ -66,6 +66,118 @@ Class that implements all the pure virtual functions of an abstract class is cal
 
 ![Abstract Class](img/abstract-class.png)
 
+The code below shows an example of an abstract class `Shape` that defines an interface that contains two virtual functions `move()` and `draw()`. This abstract class has partial implementation. It has members `x` and `y` that represents coordinates. Having these coordinates one can implement the `move()` function. The `draw()` function is a pure virtual function that must be implemented by the derived classes.
+
+``` c++
+class Shape 
+{
+    int x_, y_;
+public:
+    Shape(int x = 0, int y = 0) : x_{x}, y_{y}
+    {}
+
+    virtual ~Shape() = default;
+
+    virtual void move(int dx, int dy) 
+    {
+        x_ += dx;
+        y_ += dy;
+    }
+
+    virtual void draw() const = 0;
+};
+
+class Rectangle : public Shape 
+{
+    int width_, height_;
+public:
+    Rectangle(int x, int y, int width, int height) : Shape(x, y), width_{width}, height_{height}
+    {}
+
+    void draw() const override 
+    {
+        std::cout << "Drawing a rectangle at (" << x_ << ", " << y_ << ") with width " << width_ << " and height " << height_ << std::endl;
+    }
+};
+```
+
+
+Inheritance from an abstract class with a partial implementation can lead to some issues. For instance, when we want to represent a position of triangle vertices in an array then the derived members `x` and `y` are obsolete. This leads to a waste of memory and can cause a confusion where the state of the object is stored.
+
+#### Extraction of the Pure Interface
+
+In order to avoid dependency on the base class implementation one can extract "the pure interface" - `Shape`. The abstract class `ShapeBase` with a partial implementation derives from the interface. Concrete classes can choose to derive from the interface avoiding unnecessary coupling or from the abstract class avoiding code redundancy.
+
+![Abstract Class - Interface](img/shape-base.png)
+
+``` c++
+class Shape 
+{    
+public:                
+    virtual ~Shape() = default;
+
+    virtual void move(int dx, int dy)  = 0;
+    virtual void draw() const = 0;
+};
+
+struct Point { int x, y; };
+
+class ShapeBase : public Shape 
+{    
+    Point coord_;
+public:                
+    ShapeBase(int x, int y) : coord_{x, y}
+    {}
+
+    void move(int dx, int dy)  override
+    {
+        coord_.x += dx;
+        coord_.y += dy;
+    }      
+};
+```
+
+Now concrete classes can derive from the pure interface:
+
+```c++
+class Triangle : public Shape
+{
+    Point vertices_[3];
+public:
+    void move(int dx, int dy) override
+    {
+        for (auto& vertex : vertices_)
+        {
+            vertex.x += dx;
+            vertex.y += dy;
+        }
+    }
+
+    void draw() const override
+    {
+        std::cout << "Drawing a triangle [" << vertices_[0] << ", " << vertices_[1] << vertices_[2] << "]" << std::endl;
+    }
+};
+```
+
+or from the abstract class with implementation of coordinates and move.
+
+``` c++
+class Rectangle : public ShapeBase 
+{    
+public:
+    Rectangle(int x, int y, int width, int height) : ShapeBase{x, y}
+    {        
+    }
+
+    void draw() const override 
+    {
+        std::cout << "Drawing a rectangle at (" << coord_.x << ", " << coord_.y << ") " 
+                  << "with width " << width_ << " and height " << height_ << std::endl;
+    }
+};
+```
+
 ## Basic OOP Techniques
 
 ### Inheritance
