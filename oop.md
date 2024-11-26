@@ -554,11 +554,22 @@ class TextParagraph
 {
     std::string text_;
     Color color_;
+
 public:
+    TextParagraph(std::string text, Color color) : text_(std::move(text)), color_(std::move(color))
+    {
+    }
+
+    const std::string& text() const {
+        return text_;
+    }
+
     virtual void render(size_t line_width) const
     {
-        std::cout << text_ << std::endl;
+        std::cout << "[" << text() << std::setw(line_width - text().length()) << std::right << "" << "]\n";
     }
+
+    virtual ~TextParagraph() noexcept = default;
 
     // other methods...
 };
@@ -566,18 +577,24 @@ public:
 class RightAlignedTextParagraph : public TextParagraph
 {
 public:
-    void render(int line_width) const override
+    using TextParagraph::TextParagraph;
+
+    void render(size_t line_width) const override
     {
-        std::cout << std::setw(line_width - text_.size()) << text_ << std::endl;
+        std::cout << "[" << std::setw(line_width) << std::right << text() << "]\n";
     }
 };
 
 class CenteredAlignedTextParagraph : public TextParagraph
 {
 public:
+    using TextParagraph::TextParagraph;
+
     void render(size_t line_width) const override
     {
-        std::cout << std::setw((line_width - text_.size()) / 2) << text_ << std::endl;
+        auto pad_left = (line_width - text().length()) / 2; 
+        auto pad_right = line_width - text().length() - pad_left;
+        std::cout << "[" << std::setw(pad_left) << "" << text() << std::setw(pad_right) << "" << "]\n" ;
     }
 };
 ```
@@ -592,7 +609,7 @@ UML diagram for the code above:
 
 * Code that uses delegation:
 
-    `TextAlignment` is an interface that defines the behavior of the classes that control the alignment of the text. The instance of `TextParagraph` gets the `render()` request but instead to implement the alignment by itself it delegates the request to the `TextAlignment` object. Alignment can be set and even changed at runtime.
+    `TextAlignment` is an interface that defines the behavior of the classes that control the alignment of the text. The instance of `TextParagraph` gets the `render()` request but instead to implement the alignment by itself it delegates the request to the `TextAlignment` object.
 
 ![Delegation](img/delegation-after.png)
 
@@ -601,7 +618,7 @@ class TextAlignment
 {
 public:
     virtual std::string aligned_text(const std::string& text, size_t line_width) const = 0;
-    virtual ~Alignment() = default;
+    virtual ~TextAlignment() = default;
 };
 
 class LeftAlignment : public TextAlignment
@@ -609,16 +626,9 @@ class LeftAlignment : public TextAlignment
 public:
     std::string aligned_text(const std::string& text, size_t line_width) const override
     {
-        return text;
-    }
-};
-
-class RightAlignment : public TextAlignment
-{
-public:
-    std::string aligned_text(const std::string& text, size_t line_width) const override
-    {
-        return std::string(line_width - text.size(), ' ') + text;
+        std::stringstream out_str;
+        out_str << text << std::setw(line_width - text.length()) << std::right << "";
+        return out_str.str();
     }
 };
 
@@ -627,9 +637,23 @@ class CenterAlignment : public TextAlignment
 public:
     std::string aligned_text(const std::string& text, size_t line_width) const override
     {
-        size_t padding = (line_width - text.size()) / 2;
-        return std::string(padding) + text + std::string(padding);
+        std::stringstream out_str;
+        auto pad_left = (line_width - text.length()) / 2;
+        auto pad_right = line_width - text.length() - pad_left;
+        out_str << std::setw(pad_left) << "" << text << std::setw(pad_right) << "";
+        return out_str.str();
     }
+};
+
+class RightAlignment : public TextAlignment
+{
+public:
+    std::string aligned_text(const std::string& text, size_t line_width) const override
+    {
+        std::stringstream out_str;
+        out_str << std::setw(line_width) << std::right << text;
+        return out_str.str();
+    };
 };
 
 class TextParagraph
@@ -637,19 +661,38 @@ class TextParagraph
     std::string text_;
     Color color_;
     std::unique_ptr<TextAlignment> alignment_;
+
 public:
-    void render(size_t line_width) const
+    TextParagraph(std::string text, Color color, std::unique_ptr<TextAlignment> alignment = std::make_unique<LeftAlignment>())
+        : text_(std::move(text))
+        , color_(std::move(color))
+        , alignment_{std::move(alignment)}
     {
-        std::cout << alignment_->aligned_text(text_, line_width) << std::endl;
     }
 
-    void set_alignment(std::unique_ptr<Alignment> alignment)
+    void set_alignment(std::unique_ptr<TextAlignment> alignment)
     {
         alignment_ = std::move(alignment);
     }
 
-    // other methods...
+    void render(size_t line_width) const
+    {
+        std::cout << "[" << alignment_->aligned_text(text_, line_width) << "]\n";
+    }
 };
+```
+
+Alignment of the text paragraph can be set and even changed at runtime:
+
+```c++
+TextParagraph text{"This is sample of text...", Color{0, 0, 0}};
+text.render(80);
+
+text.set_alignment(std::make_unique<RightAlignment>());
+text.render(80);
+
+text.set_alignment(std::make_unique<CenterAlignment>());
+text.render(80);
 ```
 
 #### Delegation - Pros and Cons
