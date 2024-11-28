@@ -3,3 +3,12 @@ root: index
 chapters:
 - file: oop
 - file: solid
+- file: design-patterns
+- file: creational/creational
+  sections:
+  - file: factories
+  - file: creational/factory-method
+  - file: creational/abstract-factory
+  - file: creational/prototype
+  - file: creational/builder
+  - file: creational/singleton
