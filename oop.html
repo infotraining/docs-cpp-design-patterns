@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Foundations of Object-Oriented Programming &#8212; Design Patterns in C++</title>
   
@@ -15,57 +14,54 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4b992f07" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oop';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="S.O.L.I.D. Principles" href="solid.html" />
+    <link rel="next" title="S.O.L.I.D. Principles" href="solid/solid.html" />
     <link rel="prev" title="" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -76,19 +72,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +110,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +138,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -142,12 +152,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Design Patterns in C++ - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Design Patterns in C++ - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -159,7 +180,24 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Foundations of Object-Oriented Programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solid.html">S.O.L.I.D. Principles</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="solid/solid.html">S.O.L.I.D. Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="solid/srp.html">Single Responsibility Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solid/ocp.html">Open/Closed Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solid/lsp.html">Liskov Substitution Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solid/isp.html">Interface Segregation Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solid/dip.html">Dependency Inversion Principle</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="design-patterns.html">Design Patterns</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="creational/creational.html">Creational Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="factories.html">Factories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creational/factory-method.html">Factory Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creational/abstract-factory.html">Abstract Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creational/prototype.html">Prototype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creational/builder.html">Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creational/singleton.html">Singleton</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -175,7 +213,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -184,14 +222,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -313,26 +351,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -402,12 +442,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="foundations-of-object-oriented-programming">
-<h1>Foundations of Object-Oriented Programming<a class="headerlink" href="#foundations-of-object-oriented-programming" title="Permalink to this heading">#</a></h1>
+<h1>Foundations of Object-Oriented Programming<a class="headerlink" href="#foundations-of-object-oriented-programming" title="Link to this heading">#</a></h1>
 <section id="four-tenets-of-object-oriented-programming">
-<h2>Four tenets of object-oriented programming<a class="headerlink" href="#four-tenets-of-object-oriented-programming" title="Permalink to this heading">#</a></h2>
+<h2>Four tenets of object-oriented programming<a class="headerlink" href="#four-tenets-of-object-oriented-programming" title="Link to this heading">#</a></h2>
 <p>Object-oriented programming (OOP) is a programming paradigm that uses “objects” to design applications and computer programs.</p>
 <p>It utilizes several techniques to design and develop software. The four major principles of object-oriented programming are:</p>
 <ol class="arabic">
@@ -436,9 +476,9 @@ document.write(`
 </ol>
 </section>
 <section id="object-interface-class">
-<h2>Object - Interface - Class<a class="headerlink" href="#object-interface-class" title="Permalink to this heading">#</a></h2>
+<h2>Object - Interface - Class<a class="headerlink" href="#object-interface-class" title="Link to this heading">#</a></h2>
 <section id="object">
-<h3>Object<a class="headerlink" href="#object" title="Permalink to this heading">#</a></h3>
+<h3>Object<a class="headerlink" href="#object" title="Link to this heading">#</a></h3>
 <p>An object is a real-world entity that has a state and behavior. It can be a physical entity or a conceptual entity. An object has three main characteristics:</p>
 <ol class="arabic simple">
 <li><p><strong>State</strong>: It represents the data (attributes) of an object.</p></li>
@@ -448,22 +488,23 @@ document.write(`
 <p>In object oriented software objects communicate with each other using methods.</p>
 </section>
 <section id="interface">
-<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h3>
+<h3>Interface<a class="headerlink" href="#interface" title="Link to this heading">#</a></h3>
 <p>An interface is a public contract that defines the methods that a class must implement. It specifies what a class must do but not how it does it. Interfaces are used to define the behavior of an object.</p>
 <p>Interface is separated from the objects implementation. Many objects that have the same interface can vary in their implementation.</p>
 </section>
 <section id="class">
-<h3>Class<a class="headerlink" href="#class" title="Permalink to this heading">#</a></h3>
+<h3>Class<a class="headerlink" href="#class" title="Link to this heading">#</a></h3>
 <p>Class defines the implementation for an object. It is a blueprint for creating objects. It defines the attributes and methods that an object will have.</p>
 <p>Class allows to instantiate objects. An object is an instance of a class.</p>
 <section id="abstract-class">
-<h4>Abstract Class<a class="headerlink" href="#abstract-class" title="Permalink to this heading">#</a></h4>
+<h4>Abstract Class<a class="headerlink" href="#abstract-class" title="Link to this heading">#</a></h4>
 <p>An abstract class is a class that cannot be instantiated.</p>
 <p>It is used to define a common interface for all the subclasses. It allows to define <strong>abstract methods</strong> that must be implemented by the subclasses.</p>
 <p>Abstract methods are methods that are declared in the abstract class but do not have an implementation. In C++ they are declared as <strong>pure virtual functions</strong>.</p>
 <p>Class that contains at least one pure virtual function is called an abstract class.</p>
 <p>Class that implements all the pure virtual functions of an abstract class is called a <strong>concrete class</strong> and can be instantiated.</p>
-<p><img alt="Abstract Class" src="_images/abstract-class.png" /></p>
+<a class="reference internal image-reference" href="_images/abstract-class.png"><img alt="Abstract Class" class="align-center" src="_images/abstract-class.png" style="width: 800px;" />
+</a>
 <p>The code below shows an example of an abstract class <code class="docutils literal notranslate"><span class="pre">Shape</span></code> that defines an interface that contains two virtual functions <code class="docutils literal notranslate"><span class="pre">move()</span></code> and <code class="docutils literal notranslate"><span class="pre">draw()</span></code>. This abstract class has partial implementation. It has members <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> that represents coordinates. Having these coordinates one can implement the <code class="docutils literal notranslate"><span class="pre">move()</span></code> function. The <code class="docutils literal notranslate"><span class="pre">draw()</span></code> function is a pure virtual function that must be implemented by the derived classes.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span>
 <span class="p">{</span>
@@ -500,9 +541,10 @@ document.write(`
 <p>Inheritance from an abstract class with a partial implementation can lead to some issues. For instance, when we want to represent a position of triangle vertices in an array then the derived members <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are obsolete. This leads to a waste of memory and can cause a confusion where the state of the object is stored.</p>
 </section>
 <section id="extraction-of-the-pure-interface">
-<h4>Extraction of the Pure Interface<a class="headerlink" href="#extraction-of-the-pure-interface" title="Permalink to this heading">#</a></h4>
+<h4>Extraction of the Pure Interface<a class="headerlink" href="#extraction-of-the-pure-interface" title="Link to this heading">#</a></h4>
 <p>In order to avoid dependency on the base class implementation one can extract “the pure interface” - <code class="docutils literal notranslate"><span class="pre">Shape</span></code>. The abstract class <code class="docutils literal notranslate"><span class="pre">ShapeBase</span></code> with a partial implementation derives from the interface. Concrete classes can choose to derive from the interface avoiding unnecessary coupling or from the abstract class avoiding code redundancy.</p>
-<p><img alt="Abstract Class - Interface" src="_images/shape-base.png" /></p>
+<a class="reference internal image-reference" href="_images/shape-base.png"><img alt="Shape Base" class="align-center" src="_images/shape-base.png" style="width: 850px;" />
+</a>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span>
 <span class="p">{</span><span class="w">    </span>
 <span class="k">public</span><span class="o">:</span><span class="w">                </span>
@@ -570,7 +612,7 @@ document.write(`
 </section>
 </section>
 <section id="polymorphism">
-<h2>Polymorphism<a class="headerlink" href="#polymorphism" title="Permalink to this heading">#</a></h2>
+<h2>Polymorphism<a class="headerlink" href="#polymorphism" title="Link to this heading">#</a></h2>
 <p>Polymorphism is a feature of object-oriented programming that allows to perform a single action in different ways. It allows to define one interface and have multiple implementations. Objects that have the same interface can be used interchangeably.</p>
 <p>In C++ polymorphism can be achieved in many ways:</p>
 <ul class="simple">
@@ -579,7 +621,7 @@ document.write(`
 <li><p>using <strong>polymorphic wrappers</strong> - this is form of dynamic polymorphism and it is also called as <strong>duck typing</strong>.</p></li>
 </ul>
 <section id="dynamic-polymorphism">
-<h3>Dynamic Polymorphism<a class="headerlink" href="#dynamic-polymorphism" title="Permalink to this heading">#</a></h3>
+<h3>Dynamic Polymorphism<a class="headerlink" href="#dynamic-polymorphism" title="Link to this heading">#</a></h3>
 <p>Dynamic polymorphism in C++ is achieved by using <strong>virtual functions</strong> and <strong>inheritance</strong>. It allows to define a common interface for a group of classes. Virtual functions from a base class can be overridden by the derived classes.</p>
 <p>When a pointer or reference to a base class is used to refer to an object of derived class, the function call is resolved at runtime (via <strong>virtual-table</strong>). It allows to change the behavior required by some client at runtime.</p>
 <p>Example:</p>
@@ -639,7 +681,7 @@ document.write(`
 </div>
 <p>Polymorphism in this scenario allows to change the behavior of the <code class="docutils literal notranslate"><span class="pre">Logger</span></code> class at runtime. The <code class="docutils literal notranslate"><span class="pre">Logger</span></code> class is not dependent on the concrete implementation of the <code class="docutils literal notranslate"><span class="pre">Formatter</span></code> class. It uses the <code class="docutils literal notranslate"><span class="pre">Formatter</span></code> interface to format the data.</p>
 <section id="dynamic-polymorphism-pros-and-cons">
-<h4>Dynamic Polymorphism - Pros and Cons<a class="headerlink" href="#dynamic-polymorphism-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<h4>Dynamic Polymorphism - Pros and Cons<a class="headerlink" href="#dynamic-polymorphism-pros-and-cons" title="Link to this heading">#</a></h4>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p><strong>Flexibility</strong>: Dynamic polymorphism allows to change the behavior of the object at runtime. It allows to define a common interface for a group of classes and use them interchangeably.</p></li>
@@ -655,7 +697,7 @@ document.write(`
 </section>
 </section>
 <section id="static-polymorphism">
-<h3>Static Polymorphism<a class="headerlink" href="#static-polymorphism" title="Permalink to this heading">#</a></h3>
+<h3>Static Polymorphism<a class="headerlink" href="#static-polymorphism" title="Link to this heading">#</a></h3>
 <p>Static polymorphism in C++ is achieved by using <strong>templates</strong>. When we pass a type with an interface required by the client as a template parameter, the client can use the type as if it was a polymorphic object. It allows to set the behavior of the object at compile time.</p>
 <p>Example of a template class that uses a type that provides a <code class="docutils literal notranslate"><span class="pre">format()</span></code> method as a template parameter:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">TFormatter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UpperCaseFormatter</span><span class="o">&gt;</span>
@@ -741,7 +783,7 @@ document.write(`
 </div>
 </div>
 <section id="static-polymorphism-pros-and-cons">
-<h4>Static Polymorphism - Pros and Cons<a class="headerlink" href="#static-polymorphism-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<h4>Static Polymorphism - Pros and Cons<a class="headerlink" href="#static-polymorphism-pros-and-cons" title="Link to this heading">#</a></h4>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p><strong>Performance</strong>: Static polymorphism has no performance overhead. The function calls are resolved at compile time. It allows to achieve better performance than dynamic polymorphism.</p></li>
@@ -756,14 +798,14 @@ document.write(`
 </section>
 </section>
 <section id="polymorphic-wrappers">
-<h3>Polymorphic Wrappers<a class="headerlink" href="#polymorphic-wrappers" title="Permalink to this heading">#</a></h3>
+<h3>Polymorphic Wrappers<a class="headerlink" href="#polymorphic-wrappers" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">TODO:</span> <span class="pre">In</span> <span class="pre">the</span> <span class="pre">future</span></code></p>
 </section>
 </section>
 <section id="basic-oop-techniques">
-<h2>Basic OOP Techniques<a class="headerlink" href="#basic-oop-techniques" title="Permalink to this heading">#</a></h2>
+<h2>Basic OOP Techniques<a class="headerlink" href="#basic-oop-techniques" title="Link to this heading">#</a></h2>
 <section id="inheritance">
-<h3>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h3>
+<h3>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h3>
 <p>Inheritance is a mechanism in which one class acquires the properties and behavior of another class. It allows to define a new class based on an existing class.</p>
 <p>One can distinguish between two types of inheritance:</p>
 <ul class="simple">
@@ -771,7 +813,7 @@ document.write(`
 <li><p><strong>Inheritance of interface</strong> (<em>polymorphism</em>).</p></li>
 </ul>
 <section id="inheritance-of-implementation">
-<h4>Inheritance of Implementation<a class="headerlink" href="#inheritance-of-implementation" title="Permalink to this heading">#</a></h4>
+<h4>Inheritance of Implementation<a class="headerlink" href="#inheritance-of-implementation" title="Link to this heading">#</a></h4>
 <p>Inheritance of implementation is a technique that allows to reuse the code of an existing class. It allows to define a new class that inherits the attributes and methods (its implementation) of an existing class.</p>
 <p>In C++ inheritance of implementation can be achieved using <strong>private inheritance</strong>.</p>
 <p>Example:</p>
@@ -802,7 +844,7 @@ document.write(`
 </div>
 </section>
 <section id="inheritance-of-interface">
-<h4>Inheritance of Interface<a class="headerlink" href="#inheritance-of-interface" title="Permalink to this heading">#</a></h4>
+<h4>Inheritance of Interface<a class="headerlink" href="#inheritance-of-interface" title="Link to this heading">#</a></h4>
 <p>Defines when object of one type (<em>derived type</em>) can be used in place of an object of another type (<em>base type</em>).</p>
 <p>In C++ inheritance of interface can be achieved using <strong>public inheritance from a class that has only abstract methods</strong>.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
@@ -835,7 +877,7 @@ document.write(`
 </div>
 </section>
 <section id="inheritance-pros-and-cons">
-<h4>Inheritance - Pros and Cons<a class="headerlink" href="#inheritance-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<h4>Inheritance - Pros and Cons<a class="headerlink" href="#inheritance-pros-and-cons" title="Link to this heading">#</a></h4>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p><strong>Code Reusability</strong>: Inheritance allows to reuse the code of an existing class.</p></li>
@@ -853,7 +895,7 @@ document.write(`
 </section>
 </section>
 <section id="composition">
-<h3>Composition<a class="headerlink" href="#composition" title="Permalink to this heading">#</a></h3>
+<h3>Composition<a class="headerlink" href="#composition" title="Link to this heading">#</a></h3>
 <p>Composition is a technique in which one class contains an object of another class. It allows to create complex types by combining objects of other types.</p>
 <p>Composition is a “has-a” relationship between two classes.</p>
 <p>Example:</p>
@@ -876,7 +918,7 @@ document.write(`
 </pre></div>
 </div>
 <section id="composition-pros-and-cons">
-<h4>Composition - Pros and Cons<a class="headerlink" href="#composition-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<h4>Composition - Pros and Cons<a class="headerlink" href="#composition-pros-and-cons" title="Link to this heading">#</a></h4>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p><strong>Code Reusability</strong>: Composition allows to reuse the code of an existing class.</p></li>
@@ -896,7 +938,7 @@ document.write(`
 </section>
 </section>
 <section id="delegation">
-<h3>Delegation<a class="headerlink" href="#delegation" title="Permalink to this heading">#</a></h3>
+<h3>Delegation<a class="headerlink" href="#delegation" title="Link to this heading">#</a></h3>
 <p>Delegation is a technique in which one object forwards a method call to another object. It allows to reuse the code of an existing class. It is a form of composition, however in static typed languages like C++ it is requires also usage of inheritance.</p>
 <p>In delegation there are two objects involved in the process of handling a request:</p>
 <ul class="simple">
@@ -957,13 +999,15 @@ document.write(`
 </pre></div>
 </div>
 <p>UML diagram for the code above:</p>
-<a class="reference internal image-reference" href="_images/delegation-before.svg"><img alt="Inheritance" class="align-center" src="_images/delegation-before.svg" width="650px" /></a>
+<a class="reference internal image-reference" href="_images/delegation-before.svg"><img alt="Inheritance" class="align-center" src="_images/delegation-before.svg" style="width: 650px;" />
+</a>
 <ul>
 <li><p>Code that uses delegation:</p>
 <p><code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> is an interface that defines the behavior of the classes that control the alignment of the text. The instance of <code class="docutils literal notranslate"><span class="pre">TextParagraph</span></code> gets the <code class="docutils literal notranslate"><span class="pre">render()</span></code> request but instead to implement the alignment by itself it delegates the request to the <code class="docutils literal notranslate"><span class="pre">TextAlignment</span></code> object.</p>
 </li>
 </ul>
-<p><img alt="Delegation" src="_images/delegation-after.png" /></p>
+<a class="reference internal image-reference" href="_images/delegation-after.svg"><img alt="Delegation" class="align-center" src="_images/delegation-after.svg" style="width: 850px;" />
+</a>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TextAlignment</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
@@ -1044,7 +1088,7 @@ document.write(`
 </pre></div>
 </div>
 <section id="delegation-pros-and-cons">
-<h4>Delegation - Pros and Cons<a class="headerlink" href="#delegation-pros-and-cons" title="Permalink to this heading">#</a></h4>
+<h4>Delegation - Pros and Cons<a class="headerlink" href="#delegation-pros-and-cons" title="Link to this heading">#</a></h4>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p><strong>Code Reusability</strong>: Delegation allows to reuse the code of an existing class.</p></li>
@@ -1091,11 +1135,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="index.html"
@@ -1107,7 +1150,7 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="solid.html"
+       href="solid/solid.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -1115,10 +1158,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1126,6 +1166,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1194,9 +1235,10 @@ By Krystian Piękoś - Infotraining
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1220,8 +1262,8 @@ By Krystian Piękoś - Infotraining
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -64,7 +64,11 @@ Class that contains at least one pure virtual function is called an abstract cla
 
 Class that implements all the pure virtual functions of an abstract class is called a **concrete class** and can be instantiated.
 
-![Abstract Class](img/abstract-class.png)
+```{image} img/abstract-class.png
+:alt: Abstract Class
+:width: 800px
+:align: center
+```
 
 The code below shows an example of an abstract class `Shape` that defines an interface that contains two virtual functions `move()` and `draw()`. This abstract class has partial implementation. It has members `x` and `y` that represents coordinates. Having these coordinates one can implement the `move()` function. The `draw()` function is a pure virtual function that must be implemented by the derived classes.
 
@@ -108,7 +112,11 @@ Inheritance from an abstract class with a partial implementation can lead to som
 
 In order to avoid dependency on the base class implementation one can extract "the pure interface" - `Shape`. The abstract class `ShapeBase` with a partial implementation derives from the interface. Concrete classes can choose to derive from the interface avoiding unnecessary coupling or from the abstract class avoiding code redundancy.
 
-![Abstract Class - Interface](img/shape-base.png)
+```{image} img/shape-base.png
+:alt: Shape Base
+:width: 850px
+:align: center
+```
 
 ``` c++
 class Shape 
@@ -611,7 +619,11 @@ UML diagram for the code above:
 
     `TextAlignment` is an interface that defines the behavior of the classes that control the alignment of the text. The instance of `TextParagraph` gets the `render()` request but instead to implement the alignment by itself it delegates the request to the `TextAlignment` object.
 
-![Delegation](img/delegation-after.png)
+```{image} img/delegation-after.svg
+:alt: Delegation
+:width: 850px
+:align: center
+```
 
 ```c++
 class TextAlignment
