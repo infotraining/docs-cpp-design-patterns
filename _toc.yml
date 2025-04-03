@@ -2,7 +2,13 @@ format: jb-book
 root: index
 chapters:
 - file: oop
-- file: solid
+- file: solid/solid
+  sections:
+  - file: solid/srp
+  - file: solid/ocp
+  - file: solid/lsp
+  - file: solid/isp
+  - file: solid/dip
 - file: design-patterns
 - file: creational/creational
   sections:

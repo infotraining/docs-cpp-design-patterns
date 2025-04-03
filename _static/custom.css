@@ -142,3 +142,12 @@ dt {
 .table tbody tr:hover {
   background-color: #ababab33 !important;
 }
+
+blockquote {
+  background-color: var(--pst-color-surface);
+  border-left: .5em solid #7ca0d7e1;
+  border-radius: 0px !important;
+  color: var(--pst-color-text-muted);
+  padding: 1em;
+  position: relative;
+}

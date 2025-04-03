@@ -45,5 +45,5 @@ A factory is an object that creates other objects. Its main responsibility is to
 Factories can be used in three distinct scenarios:
 
 1. When we want to free the client code from knowing the concrete class that will be created.
-2. When we want to create an object based on some parameter (e.g., an ID of type `std::string` or `enum`). This parameter can be known at runtime.
+2. When we want to create an object based on some parameter (e.g. an ID of type given as `std::string` or `enum`). This parameter can be known at runtime.
 3. When the type of object to be created depends on the type of object that is already created.
