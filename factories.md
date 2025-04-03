@@ -22,7 +22,7 @@ public:
         std::optional<Track> track = music_service.get_track(track_title);
         if (track.has_value())
         {
-            music_service.play(track->id());
+            //... play the track
         }
         else
         {
