@@ -17,24 +17,24 @@ project:
       template: plain_latex_book
       output: exports/design-patterns-cpp.pdf
   toc:
-    - file: index.md
-    - file: oop.md
-    - file: solid/solid.md
+    - file: content/index.md
+    - file: content/oop.md
+    - file: content/solid/solid.md
       children:
-        - file: solid/srp.md
-        - file: solid/ocp.md
-        - file: solid/lsp.md
-        - file: solid/isp.md
-        - file: solid/dip.md
-    - file: design-patterns.md
-    - file: creational/creational.md
+        - file: content/solid/srp.md
+        - file: content/solid/ocp.md
+        - file: content/solid/lsp.md
+        - file: content/solid/isp.md
+        - file: content/solid/dip.md
+    - file: content/design-patterns.md
+    - file: content/creational/creational.md
       children:
-        - file: factories.md
-        - file: creational/factory-method.md
-        - file: creational/abstract-factory.md
-        - file: creational/prototype.md
-        - file: creational/builder.md
-        - file: creational/singleton.md
+        - file: content/creational/factories.md
+        - file: content/creational/factory-method.md
+        - file: content/creational/abstract-factory.md
+        - file: content/creational/prototype.md
+        - file: content/creational/builder.md
+        - file: content/creational/singleton.md
 site:
   template: book-theme
   options:
