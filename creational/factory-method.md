@@ -8,7 +8,7 @@
 
 The class is strongly coupled to the concrete classes it creates. This makes it hard to change the class's behavior or replace the concrete classes with other classes.
 
-```c++
+```cpp
 class MusicApp
 {
 public:
@@ -39,7 +39,7 @@ The **Factory Method** pattern suggests defining an interface for creating objec
 
 We can start with extracting an interface for the music service:
 
-```c++
+```cpp
 class MusicService
 {
 public:
@@ -51,7 +51,7 @@ public:
 
 Any specific music service should implement this interface. For example, the `SpotifyService` or `AppleMusicService`.
 
-```c++
+```cpp
 class SpotifyService : public MusicService
 {
 public:
@@ -63,7 +63,7 @@ public:
 
 Then we can abstract the process of creating the music service instance:
 
-```c++
+```cpp
 class MusicServiceCreator
 {
 public:
@@ -74,7 +74,7 @@ public:
 
 The `MusicApp` class can now delegate the responsibility of creating the music service to the objects implementing the `MusicServiceCreator` interface. The creator can be injected as dependency to the `MusicApp` class.
 
-```c++
+```cpp
 class MusicApp
 {
     std::shared_ptr<MusicServiceCreator> music_service_creator_;
@@ -140,7 +140,7 @@ We want to introduce a new functionality by writing a new class and creating an 
 
 * The Factory Method pattern allows combining parallel class hierarchies
 
-``` c++
+```cpp
 std::shared_ptr<Shape> selected_shape = get_clicked_shape();
 
 std::shared_ptr<Manipulator> manipulator = selected_shape->create_manipulator();
@@ -155,7 +155,7 @@ manipulator->on_drag(100, 200);
     - A concrete class that provides a default implementation of the factory method, but can be overridden by derived classes
 * In a simple case, the factory interface can be replaced with a type
 
-```c++ code-noblend fragment
+```cpp code-noblend fragment
 using MusicServiceCreator = std::function<std::unique_ptr<MusicService>()>;
 ```
 
@@ -167,7 +167,7 @@ The information what type of object to create arrives very often at runtime (whe
 
 Such a factory can be implemented as follows:
 
-``` c++
+```cpp
 using MusicServiceCreator = std::function<std::unique_ptr<MusicService>()>;
 
 class MusicServiceFactory
@@ -189,7 +189,7 @@ public:
 
 The creators are registered with the factory using the `register_creator` method. As a creator, we can use a lambda function that creates an instance of the desired class.
 
-``` c++
+```cpp
 MusicServiceFactory music_service_factory;
 
 music_service_factory.register_creator("Tidal", 

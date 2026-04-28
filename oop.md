@@ -72,7 +72,7 @@ Class that implements all the pure virtual functions of an abstract class is cal
 
 The code below shows an example of an abstract class `Shape` that defines an interface that contains two virtual functions `move()` and `draw()`. This abstract class has partial implementation. It has members `x` and `y` that represents coordinates. Having these coordinates one can implement the `move()` function. The `draw()` function is a pure virtual function that must be implemented by the derived classes.
 
-``` c++
+```cpp
 class Shape 
 {
     int x_, y_;
@@ -118,7 +118,7 @@ In order to avoid dependency on the base class implementation one can extract "t
 :align: center
 ```
 
-``` c++
+```cpp
 class Shape 
 {    
 public:                
@@ -147,7 +147,7 @@ public:
 
 Now concrete classes can derive from the pure interface:
 
-```c++
+```cpp
 class Triangle : public Shape
 {
     Point vertices_[3];
@@ -170,7 +170,7 @@ public:
 
 or from the abstract class with implementation of coordinates and move.
 
-``` c++
+```cpp
 class Rectangle : public ShapeBase 
 {    
 public:
@@ -204,7 +204,7 @@ When a pointer or reference to a base class is used to refer to an object of der
 
 Example:
 
-```c++
+```cpp
 class Formatter
 {
 public:
@@ -232,7 +232,7 @@ public:
 
 Now we can define concrete classes that implement the `Formatter` interface:
 
-```c++
+```cpp
 class UpperCaseFormatter : public Formatter {
 public:
     std::string format(const std::string& data) override {
@@ -256,7 +256,7 @@ public:
 
 Now we can use the `Logger` class with different formatters:
 
-```c++
+```cpp
 Logger logger{std::make_unique<UpperCaseFormatter>()};
 logger.log("Hello, World!");
 
@@ -290,7 +290,7 @@ Static polymorphism in C++ is achieved by using **templates**. When we pass a ty
 
 Example of a template class that uses a type that provides a `format()` method as a template parameter:
 
-```c++
+```cpp
 template <typename TFormatter = UpperCaseFormatter>
 class Logger
 {
@@ -313,7 +313,7 @@ public:
 
 Now we can define concrete classes that provide the `format()` method:
 
-```c++
+```cpp
 struct UpperCaseFormatter
 {
     std::string format(const std::string& message) const
@@ -340,7 +340,7 @@ Notice that both classes provide the `format()` method which is not virtual. The
 
 Now we can parametrize the `Logger` class with different formatters at compile time:
 
-```c++
+```cpp
 Logger logger_1{UpperCaseFormatter{}};
 logger_1.log("Hello, World!");
 
@@ -451,7 +451,7 @@ Defines when object of one type (*derived type*) can be used in place of an obje
 
 In C++ inheritance of interface can be achieved using **public inheritance from a class that has only abstract methods**.
 
-```c++
+```cpp
 class Shape
 {
 public:
@@ -472,7 +472,7 @@ public:
 
 When the clients are using a reference or a pointer to the interface class they are unaware of the actual implementation of the object. This allows to change the implementation without affecting the client.
 
-```c++
+```cpp
 void draw_shapes(const std::vector<std::unique_ptr<Shape>>& shapes)
 {
     for (const auto& shape : shapes)
@@ -507,7 +507,7 @@ Composition is a "has-a" relationship between two classes.
 
 Example:
 
-```c++
+```cpp
 class RecentlyUsedList
 {
     std::deque<std::string> list_;
@@ -557,7 +557,7 @@ The following example compares the delegation and inheritance techniques.
 
 * Code that uses inheritance:
 
-```c++
+```cpp
 class TextParagraph
 {
     std::string text_;
@@ -625,7 +625,7 @@ UML diagram for the code above:
 :align: center
 ```
 
-```c++
+```cpp
 class TextAlignment
 {
 public:
@@ -696,7 +696,7 @@ public:
 
 Alignment of the text paragraph can be set and even changed at runtime:
 
-```c++
+```cpp
 TextParagraph text{"This is sample of text...", Color{0, 0, 0}};
 text.render(80);
 

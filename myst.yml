@@ -1,0 +1,46 @@
+version: 1
+project:
+  title: Design Patterns in C++
+  authors:
+    - name: Krystian Piękoś - Infotraining
+  github: infotraining/docs-cpp-design-patterns
+  thebe:
+    binder:
+      repo: infotraining/docs-cpp-design-patterns
+      provider: github
+      url: https://mybinder.org
+      ref: master
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/design-patterns-cpp.pdf
+  toc:
+    - file: index.md
+    - file: oop.md
+    - file: solid/solid.md
+      children:
+        - file: solid/srp.md
+        - file: solid/ocp.md
+        - file: solid/lsp.md
+        - file: solid/isp.md
+        - file: solid/dip.md
+    - file: design-patterns.md
+    - file: creational/creational.md
+      children:
+        - file: factories.md
+        - file: creational/factory-method.md
+        - file: creational/abstract-factory.md
+        - file: creational/prototype.md
+        - file: creational/builder.md
+        - file: creational/singleton.md
+site:
+  template: book-theme
+  options:
+    style: ./css/custom.css
+    logo: ./images/logo-infotraining-light.svg     # path to your logo, shown top left at site
+    logo_dark: ./images/logo-infotraining-dark.svg # path to your logo for dark mode, shown top left at site
+    favicon: ./images/favicon-infotraining.png     # path to your favicon, shown in browser tab
+    folders: false
+    hide_authors: true
