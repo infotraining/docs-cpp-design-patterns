@@ -7,7 +7,7 @@ One of the principle of good Object-Oriented Programming says to prefer loose co
 
 The code presented below breaks this principle:
 
-```c++
+```cpp
 class MusicApp
 {
 public:
