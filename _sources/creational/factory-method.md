@@ -23,7 +23,7 @@ public:
         std::optional<Track> track = music_service.get_track(track_title);
         if (track.has_value())
         {
-            music_service.play(track);
+            // ... play the track
         }
         else
         {
@@ -114,7 +114,10 @@ We want to introduce a new functionality by writing a new class and creating an 
 
 ## Factory Method - Structure
 
-![](../img/dp/Factory.png)
+```{image} ../img/dp/Factory.png
+:width: 800px
+:align: center
+```
 
 ## Factory Method - Collaboration
 
@@ -130,7 +133,10 @@ We want to introduce a new functionality by writing a new class and creating an 
 
 * Parallel class hierarchies arise when a class delegates some of its responsibilities to a separate class
 
-![](../img/dp/Factory-ShapeManipulator.png)
+```{image} ../img/dp/Factory-ShapeManipulator.png
+:width: 800px
+:align: center
+```
 
 * The Factory Method pattern allows combining parallel class hierarchies
 

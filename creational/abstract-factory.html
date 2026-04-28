@@ -30,9 +30,9 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4b992f07" />
@@ -51,7 +51,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -370,7 +370,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -386,6 +388,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intent">Intent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-from-problem-to-solution">Example - from problem to solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-context">Abstract Factory - Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-problem">Abstract Factory - Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-solution">Abstract Factory - Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-consequences">Abstract Factory - Consequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-vs-factory-method">Abstract Factory vs. Factory Method</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -397,7 +413,200 @@ document.write(`
                   
   <section id="abstract-factory">
 <h1>Abstract Factory<a class="headerlink" href="#abstract-factory" title="Link to this heading">#</a></h1>
+<section id="intent">
+<h2>Intent<a class="headerlink" href="#intent" title="Link to this heading">#</a></h2>
 <p>The <strong>Abstract Factory</strong> is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes.</p>
+</section>
+<section id="example-from-problem-to-solution">
+<h2>Example - from problem to solution<a class="headerlink" href="#example-from-problem-to-solution" title="Link to this heading">#</a></h2>
+<p>Let’s write a framework that allows us to use different database engines. We can start with introducing a set of interfaces that represent:</p>
+<ul class="simple">
+<li><p>a connection to the database</p></li>
+<li><p>a command that can be executed on the database</p></li>
+<li><p>a transaction that can be started and committed</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DbConnection</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">DbConnection</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">connect</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DbCommand</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">DbCommand</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">DbResult</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">DbConnection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SqlCmd</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SqlParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DbTransaction</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">DbTransaction</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">begin</span><span class="p">(</span><span class="n">DbConnection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">conn</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">commit</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In order to handle specific database engines, we can create a set of concrete classes that implement the above interfaces. For example, we can create a <code class="docutils literal notranslate"><span class="pre">OracleConnection</span></code>, <code class="docutils literal notranslate"><span class="pre">OracleCommand</span></code>, and <code class="docutils literal notranslate"><span class="pre">OracleTransaction</span></code> for Oracle database engine. The same applies to other database engines like PostgreSQL or SQLite.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Family of related products for Oracle database engine</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OracleConnection</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DbConnection</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">connect</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// connect to Oracle database</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">disconnect</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// disconnect from Oracle database</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OracleCommand</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DbCommand</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">DbResult</span><span class="w"> </span><span class="n">execute</span><span class="p">(</span><span class="n">DbConnection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SqlCmd</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SqlParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// execute command on Oracle database</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OracleTransaction</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DbTransaction</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">begin</span><span class="p">(</span><span class="n">DbConnection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">conn</span><span class="p">)</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// begin transaction on Oracle database</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">commit</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// commit transaction on Oracle database</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Classes that handle Sql Server or PostgreSQL can be implemented in a similar way. The important part is that all of them implement the same interfaces, which allows us to use them interchangeably.</p>
+<p>Having the different families of products we still need a way to create them. We don’t want to expose the concrete classes to the client code. This would lead to a situation where the client code is tightly coupled to the concrete classes, making it hard to change the implementation later. For example, if we want to switch from Oracle to PostgreSQL, we would need to change all the places in the code where we create <code class="docutils literal notranslate"><span class="pre">OracleConnection</span></code>, <code class="docutils literal notranslate"><span class="pre">OracleCommand</span></code>, and <code class="docutils literal notranslate"><span class="pre">OracleTransaction</span></code> objects. This is not a good design.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">insert_to_db</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleConnection</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;db&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5432</span><span class="p">);</span>
+<span class="w">    </span><span class="n">connection</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleTransaction</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">transaction</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">(</span><span class="o">*</span><span class="n">connection</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleCommand</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">command</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">command</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;INSERT INTO users (name, age) VALUES (?, ?)&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">transaction</span><span class="o">-&gt;</span><span class="n">commit</span><span class="p">();</span><span class="w">        </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Instead, we want to provide a way to create the objects without specifying their concrete classes. This is where the <strong>Abstract Factory</strong> comes into play. We can create an interface that defines methods for creating the different families of products.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DbFactory</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">DbFactory</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbConnection</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_connection</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">db_name</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbCommand</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_command</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbTransaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_transaction</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We can then create concrete factories for each database engine. For example, we can create <code class="docutils literal notranslate"><span class="pre">OracleFactory</span></code>, <code class="docutils literal notranslate"><span class="pre">PostgreSqlFactory</span></code>, and <code class="docutils literal notranslate"><span class="pre">SqlServerFactory</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OracleFactory</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DbFactory</span>
+<span class="p">{</span><span class="w">  </span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbConnection</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_connection</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">db_name</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleConnection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">db_name</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbCommand</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_command</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleCommand</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DbTransaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_transaction</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">OracleTransaction</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">DbFactory</span></code> interface to create the objects without specifying their concrete classes. This allows us to switch between different database engines easily.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">insert_to_db</span><span class="p">(</span><span class="n">DbFactory</span><span class="o">&amp;</span><span class="w"> </span><span class="n">factory</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">create_connection</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;db&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">connection</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">create_transaction</span><span class="p">();</span>
+<span class="w">    </span><span class="n">transaction</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">(</span><span class="o">*</span><span class="n">connection</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">create_command</span><span class="p">();</span>
+<span class="w">    </span><span class="n">command</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">command</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;INSERT INTO users (name, age) VALUES (?, ?)&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">transaction</span><span class="o">-&gt;</span><span class="n">commit</span><span class="p">();</span><span class="w">        </span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">OracleFactory</span><span class="w"> </span><span class="n">oracle_factory</span><span class="p">;</span>
+<span class="w">    </span><span class="n">insert_to_db</span><span class="p">(</span><span class="n">oracle_factory</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">PostgreSqlFactory</span><span class="w"> </span><span class="n">postgresql_factory</span><span class="p">;</span>
+<span class="w">    </span><span class="n">insert_to_db</span><span class="p">(</span><span class="n">postgresql_factory</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">SqlServerFactory</span><span class="w"> </span><span class="n">sqlserver_factory</span><span class="p">;</span>
+<span class="w">    </span><span class="n">insert_to_db</span><span class="p">(</span><span class="n">sqlserver_factory</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, we can easily switch between different database engines by passing a different factory to the <code class="docutils literal notranslate"><span class="pre">insert_to_db</span></code> function. This allows us to create the objects without specifying their concrete classes, which is the main goal of the <strong>Abstract Factory</strong> pattern.</p>
+</section>
+<section id="abstract-factory-context">
+<h2>Abstract Factory - Context<a class="headerlink" href="#abstract-factory-context" title="Link to this heading">#</a></h2>
+<p>We have a families of related objects that differ in their implementation. For example, we have a family of database engines (Oracle, PostgreSQL, SQL Server) and we want to create a set of objects that represent the connection, command, and transaction for each database engine.</p>
+</section>
+<section id="abstract-factory-problem">
+<h2>Abstract Factory - Problem<a class="headerlink" href="#abstract-factory-problem" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We want to create a family of related objects without specifying their concrete classes</p></li>
+<li><p>We want to be able to switch between different families of products easily</p></li>
+<li><p>We want to avoid tight coupling between the client code and the concrete classes</p></li>
+<li><p>We should be able to add new families of products without changing the existing code</p></li>
+</ul>
+</section>
+<section id="abstract-factory-solution">
+<h2>Abstract Factory - Solution<a class="headerlink" href="#abstract-factory-solution" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create an interface that defines methods for creating the different families of products</p></li>
+<li><p>Create concrete factories for each family of products that implement the interface</p></li>
+<li><p>Use the factory interface to create the objects without specifying their concrete classes</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/abstract-factory.png"><img alt="../_images/abstract-factory.png" class="align-center" src="../_images/abstract-factory.png" style="width: 800px;" />
+</a>
+</section>
+<section id="abstract-factory-consequences">
+<h2>Abstract Factory - Consequences<a class="headerlink" href="#abstract-factory-consequences" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The client code is decoupled from the concrete classes, which makes it easier to switch between different families of products</p></li>
+<li><p>The client code is easier to maintain and extend, as we can add new families of products without changing the existing code</p></li>
+<li><p>Adding a new product to a family is difficult, as we need to modify the factory interface and all the concrete factories</p></li>
+</ul>
+</section>
+<section id="abstract-factory-vs-factory-method">
+<h2>Abstract Factory vs. Factory Method<a class="headerlink" href="#abstract-factory-vs-factory-method" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The <strong>Factory Method</strong> pattern provides an interface for creating a single object without specifying its concrete class. It is used when we want to create a single object that can be of different types, but we don’t want to expose the concrete classes to the client code.</p></li>
+<li><p>The <strong>Abstract Factory</strong> pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. It is used when we want to easily replace a set of related objects that are designed to work together, ensuring consistency among the objects created by the factory.</p></li>
+<li><p>Typical solution for the <strong>Abstract Factory</strong> pattern is to use an interface that consists of several factory methods - each for a product in the family.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -454,6 +663,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intent">Intent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-from-problem-to-solution">Example - from problem to solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-context">Abstract Factory - Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-problem">Abstract Factory - Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-solution">Abstract Factory - Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-consequences">Abstract Factory - Consequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-factory-vs-factory-method">Abstract Factory vs. Factory Method</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
