@@ -13,8 +13,8 @@ project:
   bibliography:
     - references.bib
   exports:
-    - format: pdf
-      template: plain_latex_book
+    - format: typst
+      template: plain_typst_book
       output: exports/design-patterns-cpp.pdf
   toc:
     - file: content/index.md
