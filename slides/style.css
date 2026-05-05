@@ -233,6 +233,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.7;
 }
 
+.slidev-layout .text-xl blockquote p {
+  font-size: 2.0em !important;
+}
+
 .dark .slidev-layout blockquote {
   background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(241, 196, 15, 0.02));
   border-left-color: #F1C40F;
@@ -261,7 +265,7 @@ h1, h2, h3, h4, h5, h6 {
 .slidev-layout table th,
 .slidev-layout table td {
   border: 1px solid rgba(128, 128, 128, 0.3);
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
 }
 
 .text-code-sm {
@@ -282,6 +286,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-code-06 {
   font-size: 0.6em !important
+}
+
+.text-2 {
+  font-size: 2em !important;
 }
 
 .text-09 {

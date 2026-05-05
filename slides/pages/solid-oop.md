@@ -676,7 +676,7 @@ layout: center
 
 ## Naruszenie ISP
 
-![isp-before](/img/solid/ISP-Before.svg)
+![isp-before](/img/solid/isp-before.svg)
 
 ---
 class: white-slide
@@ -687,7 +687,7 @@ layout: center
 
 <span class="span-v-4"/>
 
-![isp-after](/img/solid/ISP-After.svg)
+![isp-after](/img/solid/isp-after.svg)
 
 ---
 

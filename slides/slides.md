@@ -62,3 +62,7 @@ layout: default
 ---
 src: /pages/solid-oop.md
 ---
+
+---
+src: /pages/design-patterns.md
+---
