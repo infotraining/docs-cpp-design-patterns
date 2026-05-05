@@ -100,21 +100,21 @@ class: white-slide
 
 ---
 
-## Polimorfizm
+# Polimorfizm
 
 * Zapewnienie tego samego interfejsu dla wielu obiektów różnych typów
 * Umożliwia zastępowanie w czasie wykonywania programu jednych obiektów drugimi, jeśli mają identyczny interfejs
 
 ---
 
-## Rodzaje polimorfizmu
+# Rodzaje polimorfizmu
 
 * Dynamiczny
 * Statyczny
 
 ---
 
-## Polimorfizm dynamiczny
+# Polimorfizm dynamiczny
 
 * Implementacja jest wiązana z wywołaniem w trakcie działania programu - późne wiązanie
   * dziedziczenie publiczne i nadpisywanie metod z klasy bazowej
@@ -217,7 +217,7 @@ logger.log("Hello, World!");
 
 ---
 
-## Polimorfizm statyczny
+# Polimorfizm statyczny
 
 * Działa na etapie kompilacji
   * szablony
@@ -319,7 +319,7 @@ logger2.log("hello, world!");
 
 ---
 
-## Podstawowe techniki OOP
+# Podstawowe techniki OOP
 
 * Dziedziczenie
 * Kompozycja
@@ -409,7 +409,7 @@ void draw_shapes(const std::vector<std::unique_ptr<Shape>>& shapes)
 
 ---
 
-## Dziedziczenie - wady (?/!)
+# Dziedziczenie - wady (?/!)
 
 * narusza enkapsulację
   - pola ``protected`` - implementacja typu pochodnego może zależeć od szczegółów implementacji typu bazowego
@@ -418,7 +418,7 @@ void draw_shapes(const std::vector<std::unique_ptr<Shape>>& shapes)
 
 ---
 
-## OOP Tip #1
+# OOP Tip #1
 
 Program to an interface, not an implementation!
 
@@ -432,7 +432,7 @@ Program to an interface, not an implementation!
 
 ---
 
-## OOP Tip #2
+# OOP Tip #2
 
 Favor object composition over class inheritance!
 
@@ -444,14 +444,14 @@ Favor object composition over class inheritance!
 
 ---
 
-## Delegowanie żądań
+# Delegowanie żądań
 
 * Dwa obiekty są zaangażowane w obsługę żądania
   * obiekt **przyjmujący żądanie** przekazuje operacje swojemu **delegatowi**
 
 ---
 
-## Delegacja vs. Dziedziczenie
+# Delegacja vs. Dziedziczenie
 
 ---
 class: white-slide
@@ -487,7 +487,7 @@ Delegacja umożliwia <span v-mark.underline.green>dynamiczne składanie zachowa�
 
 ---
 
-## Delegacja - zalety & wady
+# Delegacja - zalety & wady
 
 <v-clicks>
 
