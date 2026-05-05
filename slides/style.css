@@ -308,6 +308,14 @@ h1, h2, h3, h4, h5, h6 {
   margin: 2em;
 }
 
+.span-v-3 {
+  margin: 3em;
+}
+
+.span-v-4 {
+  margin: 4em;
+}
+
 .logo {
   position: absolute;
   bottom: 10px;
@@ -353,6 +361,34 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+.width-100 {
+  width: 100%;
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.width-70 {
+  width: 70%;
+}
+
+.width-60 {
+  width: 60%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
 .hint {
   background-color: rgba(201, 208, 214, 0.1);
   padding: 5px !important;
@@ -361,4 +397,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9em;
   font-style: italic;
   text-align: center;
+}
+
+.slogan {
+  font-size: xx-large;
+  color: #045475;
 }

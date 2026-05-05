@@ -507,3 +507,213 @@ Delegacja umożliwia <span v-mark.underline.green>dynamiczne składanie zachowa�
   - Być proste do rozbudowy
   - Być łatwe w serwisowaniu i modyfikacji
   - Być łatwe w testowaniu
+
+---
+layout: cover
+background: /img/petals.svg
+---
+
+# S.O.L.I.D. OOP
+
+---
+layout: center
+---
+
+<v-clicks>
+
+* Single Responsibility Principle
+
+* Opened-Closed Principle
+
+* Liskov Substitution Principle
+
+* Interface Segregation Principle
+
+* Dependency Inversion Principle
+
+</v-clicks>
+
+---
+
+# Single Responsibility Principle
+
+* każdy obiekt w kodzie powinien mieć tylko jedną odpowiedzialność, a wszystkie usługi tego obiektu powinny koncentrować się na jej realizacji
+
+---
+class: white-slide
+layout: center
+---
+
+<div class="slogan">
+
+Każda klasa powinna mieć tylko jeden <v-click><span v-mark.underline.red> powód do modyfikacji!</span></v-click> 
+
+</div>
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+![SRP](/img/solid/srp.svg)
+
+---
+
+# Open-Closed Principle
+
+<v-clicks>
+
+* Klasy powinny być <span v-mark.underline.green>otwarte na rozbudowę</span> i <span v-mark.underline.red>zamknięte na modyfikacje</span>. 
+
+</v-clicks>
+
+---
+class: white-slide
+---
+
+<center>
+
+## Naruszenie zasady OCP
+
+</center>
+
+<v-clicks>
+
+<div class="text-code-08">
+```cpp
+struct Server
+{
+    void run() { /*implementation*/ }
+}
+
+class Client
+{
+    Server server_;
+public:
+    void use()
+    {
+        server_.run();
+    }
+};
+```
+</div>
+
+<div class="span-v-2"/>
+<img src="/img/solid/ocp-before.png" alt="OCP Before" class="width-50 center" />
+<div class="span-v-2"/>
+
+</v-clicks>
+
+---
+class: white-slide
+layout: center
+---
+
+## Rozwiązanie = Interfejs
+
+<center>
+<div class="span-v-4"/>
+<img src="/img/solid/ocp-after.png" alt="OCP After" class="width-40 center" />
+</center>
+
+---
+
+# Liskov Substitution Principle
+
+<v-click>
+
+* Musi istnieć możliwość podstawiania typów pochodnych w miejsce ich typów bazowych
+
+</v-click>
+
+---
+class: white-slide
+layout: center
+---
+
+<div class="slogan">
+
+Jeżeli <span style="color: #dd2222">S</span> jest podtypem <span style="color: #22aa22">T</span>, wtedy obiekty typu <span style="color: #22aa22">T</span>
+mogą zostać zastąpione instancjami typu <span style="color: #dd2222">S</span> bez naruszenia istotnych właściwości programu (niezmienników, poprawności, itp.).
+
+</div>
+---
+
+## Design by contract
+
+* Pre-conditions cannot be strengthened in a subtype
+* Post-conditions cannot be weakened in a subtype
+* Invariants of the supertype must be preserved in a subtype
+
+---
+class: white-slide
+layout: center
+---
+
+## Naruszenie zasady LSP
+
+<span class="span-v-4"/>
+
+<v-click>
+<img src="/img/solid/lsp.svg" alt="LSP Before" class="img-lg" />
+</v-click>
+
+---
+
+# Interface Segregation Principle
+
+<v-click>
+
+* Klient nie powinien być zmuszany do <span v-mark.underline.green>zależności od metod, których nie używa.</span>  
+
+</v-click>
+
+---
+class: white-slide
+layout: center
+---
+
+## Naruszenie ISP
+
+![isp-before](/img/solid/ISP-Before.svg)
+
+---
+class: white-slide
+layout: center
+---
+
+## ISP - lepsze rozwiązanie
+
+<span class="span-v-4"/>
+
+![isp-after](/img/solid/ISP-After.svg)
+
+---
+
+# Dependency Inversion Principle
+
+* <span v-mark.underline.green>Moduły wysokopoziomowe</span> nie powinny zależeć od <span v-mark.underline.red>modułów niskopoziomowych</span>. Obie grupy modułów powinny zależeć od <span v-mark.underline.blue>abstrakcji</span>.
+* Abstrakcje nie powinny zależeć od szczegółowych rozwiązań. To szczegółowe rozwiązania powinny zależeć od abstrakcji
+
+---
+class: white-slide
+layout: center
+---
+
+## Naruszenie DIP
+
+<span class="span-v-4"/>
+
+<img src="/img/solid/dip-before.png" alt="DIP Before" class="width-50 center" />
+
+---
+class: white-slide
+layout: center
+---
+
+## DIP
+
+<span class="span-v-4"/>
+
+<img src="/img/solid/dip-after.png" alt="DIP After" class="width-80 center" />
