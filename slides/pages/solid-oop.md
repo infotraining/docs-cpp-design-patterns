@@ -519,19 +519,19 @@ background: /img/petals.svg
 layout: center
 ---
 
+<div class="no-bullets text-2">
+
 <v-clicks>
 
 * Single Responsibility Principle
-
 * Opened-Closed Principle
-
 * Liskov Substitution Principle
-
 * Interface Segregation Principle
-
 * Dependency Inversion Principle
 
 </v-clicks>
+
+</div>
 
 ---
 

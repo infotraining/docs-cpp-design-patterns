@@ -397,6 +397,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 40%;
 }
 
+.width-30 {
+  width: 30%;
+}
+
 .hint {
   background-color: rgba(201, 208, 214, 0.1);
   padding: 5px !important;
@@ -410,4 +414,9 @@ h1, h2, h3, h4, h5, h6 {
 .slogan {
   font-size: xx-large;
   color: #045475;
+}
+
+.no-bullets ul {
+  list-style-type: none;
+  padding-left: 0;
 }
