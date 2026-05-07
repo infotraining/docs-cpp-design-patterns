@@ -74,3 +74,7 @@ src: /pages/creational-patterns.md
 ---
 src: /pages/structural-patterns.md
 ---
+
+---
+src: /pages/behavioral-patterns.md
+---
