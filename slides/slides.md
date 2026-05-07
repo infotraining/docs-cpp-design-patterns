@@ -70,3 +70,7 @@ src: /pages/design-patterns.md
 ---
 src: /pages/creational-patterns.md
 ---
+
+---
+src: /pages/structural-patterns.md
+---
