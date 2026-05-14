@@ -22,16 +22,13 @@ Cohesion refers to how well the methods and properties of a class work together 
 
 - The component is focused and self-contained.
 - Easier to understand, test, and debug.
-- For example a `UserManager` class that only has CRUD methods that manage users in the database
+- For example a `UserRepository` class that only has CRUD methods that manage users in the database
 
   ```cpp
-  class UserManager 
+  class UserRepository 
   {
   public:
       void create_user(const User& user) 
-      {
-          // Code to create a user
-      }
       {
           // Code to create a user
       }
@@ -45,9 +42,6 @@ Cohesion refers to how well the methods and properties of a class work together 
       {
           // Code to update a user
       }
-      {
-          // Code to update a user's password
-      }
   
       void get_user(const std::string& username) 
       {
@@ -60,10 +54,10 @@ Cohesion refers to how well the methods and properties of a class work together 
 
 - The component tries to do too many unrelated things.
 - Difficult to maintain because changes in one aspect may break others.
-- For example, a `UserManager` class that handles user management, email sending, generating reports, and logging:
+- For example, a `UserService` class that handles user management, email sending, generating reports, and logging:
 
   ```cpp
-  class UserManager 
+  class UserService 
   {
   public:
       void create_user(const User& user) 
@@ -71,17 +65,17 @@ Cohesion refers to how well the methods and properties of a class work together 
           // Code to create a user
       }
   
-      void send_email(const std::string& email) 
+      void send_email(const User& user, const std::string& email) 
       {
           // Code to send an email
       }
   
-      void log_activity(const std::string& activity) 
+      void log_activity(const User& user, const std::string& activity) 
       {
           // Code to log user activity
       }
   
-      void generate_report() 
+      void generate_activity_report(const User& user) 
       {
           // Code to generate a report about user activities
       }
@@ -93,7 +87,7 @@ Cohesion refers to how well the methods and properties of a class work together 
 Imagine a class that handles both user authentication and logging:
 
 ```cpp
-class UserManager 
+class UserService 
 {
 public:
     void authenticate_user(const std::string& username, const std::string& password) 
@@ -101,7 +95,7 @@ public:
         // Code for user authentication
     }
 
-    void log_activity(const std::string& activity) 
+    void log_activity(const User& user, const std::string& activity) 
     {
         // Code for logging user activity
     }
@@ -116,7 +110,7 @@ This class violates SRP because it has two responsibilities which can independen
 We can fix this by separating the responsibilities into two classes:
 
 ```cpp
-class Authenticator 
+class AuthenticationService 
 {
 public:
     void authenticate_user(const std::string& username, const std::string& password) 
@@ -128,7 +122,7 @@ public:
 class Logger 
 {
 public:
-    void log_activity(const std::string& activity) 
+    void log_activity(const User& user, const std::string& activity) 
     {
         // Code for logging user activity
     }
@@ -137,7 +131,7 @@ public:
 
 Now, each class has a single responsibility:
 
-- `Authenticator` handles user authentication.
+- `AuthenticationService` handles user authentication.
 - `Logger` handles logging activities.
 
 ## Benefits of SRP
