@@ -68,7 +68,7 @@ src: /pages/design-patterns.en.md
 ---
 
 ---
-src: /pages/creational-patterns.md
+src: /pages/creational-patterns.en.md
 ---
 
 ---
