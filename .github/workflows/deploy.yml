@@ -6,7 +6,7 @@ name: Build and Deploy Website and PDF
 on:
   push:
     # Runs on pushes targeting the default branch
-    branches: [master]
+    branches: [develop]
 env:
   # `BASE_URL` determines the website is served from, including CSS & JS assets
   # You may need to change this to `BASE_URL: ''`
@@ -70,9 +70,14 @@ jobs:
         working-directory: slides
         run: pnpm install --frozen-lockfile
 
-      - name: Build Slidev deck
+      - name: Build Slidev deck PL
         working-directory: slides
-        run: pnpm run build --base "/slides/"
+        run: pnpm run build slides.md --base "/slides/pl/"
+        # run: pnpm build --base /slides/
+
+      - name: Build Slidev deck EN
+        working-directory: slides
+        run: pnpm run build slides.en.md --base "/slides/en/"
         # run: pnpm build --base /slides/
 
       - name: Copy slides into site
