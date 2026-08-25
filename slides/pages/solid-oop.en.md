@@ -64,7 +64,6 @@ class: white-slide
         }
 
         virtual void draw() const = 0;
-        ## Violating the LSP
     };
 ```
 
@@ -525,7 +524,7 @@ layout: center
 <v-clicks>
 
 * Single Responsibility Principle
-* Opened-Closed Principle
+* Open-Closed Principle
 * Liskov Substitution Principle
 * Interface Segregation Principle
 * Dependency Inversion Principle
