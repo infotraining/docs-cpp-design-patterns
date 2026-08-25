@@ -76,7 +76,7 @@ jobs:
 
       - name: Build Slidev deck PL
         working-directory: slides
-        run: pnpm run build slides.md --base "/slides/pl/" --out dist/pl
+        run: pnpm run build slides.md --base "/slides/" --out dist/pl
         # run: pnpm build --base /slides/
 
       - name: Build Slidev deck EN
@@ -86,8 +86,8 @@ jobs:
 
       - name: Copy slides into site
         run: |
-          mkdir -p docs/_build/html/slides/pl docs/_build/html/slides/en
-          cp -r slides/dist/pl/* docs/_build/html/slides/pl/
+          mkdir -p docs/_build/html/slides docs/_build/html/slides/en
+          cp -r slides/dist/pl/* docs/_build/html/slides/
           cp -r slides/dist/en/* docs/_build/html/slides/en/
         
       - name: Upload Output HTML as Artifact
