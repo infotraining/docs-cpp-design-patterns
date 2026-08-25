@@ -64,7 +64,7 @@ src: /pages/solid-oop.en.md
 ---
 
 ---
-src: /pages/design-patterns.md
+src: /pages/design-patterns.en.md
 ---
 
 ---
