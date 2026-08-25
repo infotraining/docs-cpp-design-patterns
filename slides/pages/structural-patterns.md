@@ -128,14 +128,22 @@ class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/coffee.png" alt="coffee" class="width-40 center"/>
+<img src="/img/dp/ImageDecorator-1.svg" alt="coffee" class="width-60 center"/>
 
 ---
 class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/coffee-decorated.png" alt="coffee-decorated" class="width-40 center"/>
+<img src="/img/dp/ImageDecorator-2.svg" alt="coffee-decorated" class="width-60 center"/>
+
+---
+class: white-slide
+layout: center
+---
+
+<img src="/img/dp/ImageDecorator-3.svg" alt="coffee-decorated" class="width-60 center"/>
+
 
 ---
 layout: center
@@ -496,7 +504,7 @@ class: white-slide
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/proxy-image-0.svg" alt="Proxy - Scenariusz - UML 1" class="width-80 center"/>
+<img src="/img/dp/proxy-image-0.svg" alt="Proxy - Scenariusz - UML 1" class="width-90 center"/>
 
 ---
 class: white-slide
@@ -507,7 +515,7 @@ class: white-slide
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/proxy-image-1.svg" alt="Proxy - Scenariusz - UML 2" class="width-80 center"/>
+<img src="/img/dp/proxy-image-1.svg" alt="Proxy - Scenariusz - UML 2" class="width-90 center"/>
 
 ---
 class: white-slide
@@ -547,6 +555,9 @@ class: white-slide
 
 <img src="/img/dp/Proxy.png" alt="Proxy - Struktura" class="width-80 center"/>
 
+---
+class: white-slide
+# layout: center
 ---
 
 # Proxy - Współpraca

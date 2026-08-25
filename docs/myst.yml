@@ -35,6 +35,9 @@ project:
         - file: content/creational/prototype.md
         - file: content/creational/builder.md
         - file: content/creational/singleton.md
+    - file: content/structural/structural.md
+      children:
+        - file: content/structural/composite.md
 site:
   template: book-theme
   options:

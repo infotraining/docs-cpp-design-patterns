@@ -373,9 +373,9 @@ class: white-slide
 
 # Observer - Struktura
 
-<div class="span-v-4"/>
+<div class="span-v-2"/>
 
-<img src="/img/dp/Observer.png" alt="Observer" class="width-50 center">
+<img src="/img/dp/observer.svg" alt="Observer" class="width-60 center">
 
 ---
 
