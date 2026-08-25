@@ -72,7 +72,7 @@ src: /pages/creational-patterns.en.md
 ---
 
 ---
-src: /pages/structural-patterns.md
+src: /pages/structural-patterns.en.md
 ---
 
 ---
