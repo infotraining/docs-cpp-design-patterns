@@ -76,5 +76,5 @@ src: /pages/structural-patterns.en.md
 ---
 
 ---
-src: /pages/behavioral-patterns.md
+src: /pages/behavioral-patterns.en.md
 ---
