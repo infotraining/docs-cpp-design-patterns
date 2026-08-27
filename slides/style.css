@@ -420,3 +420,15 @@ h1, h2, h3, h4, h5, h6 {
   list-style-type: none;
   padding-left: 0;
 }
+
+.slidev-layout iframe,
+.slidev-layout-iframe iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
+.slidev-layout-iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
