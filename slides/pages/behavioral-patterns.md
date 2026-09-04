@@ -67,9 +67,9 @@ layout: center
 
 # Template Method - Struktura
 
-<div class="span-v-4"/>
+<div class="span-v-2"/>
 
-<img src="/img/dp/Template.png" alt="Template Method" class="width-50 center">
+<img src="/img/gof/TemplateMethod.excalidraw.svg" alt="Template Method" class="width-70 center">
 
 ---
 
@@ -141,9 +141,9 @@ class: white-slide
 
 # Strategy - Struktura
 
-<div class="span-v-4"/>
+<div class="span-v-3"/>
 
-<img src="/img/dp/Strategy.png" alt="Strategy" class="width-70 center">
+<img src="/img/gof/Strategy.excalidraw.svg" alt="Strategy" class="width-90 center">
 
 ---
 
@@ -231,9 +231,9 @@ class: white-slide
 
 # State - Struktura
 
-<div class="span-v-4"/>
+<div class="span-v-2"/>
 
-<img src="/img/dp/State.png" alt="State" class="width-70 center">
+<img src="/img/gof/State.excalidraw.svg" alt="State" class="width-80 center">
 
 ---
 
@@ -305,9 +305,7 @@ class: white-slide
 
 # Chain of Responsibility - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Chain.png" alt="Chain of Responsibility" class="width-50 center">
+<img src="/img/gof/ChainOfResponsibility.excalidraw.svg" alt="Chain of Responsibility" class="width-70 center">
 
 ---
 
@@ -373,9 +371,7 @@ class: white-slide
 
 # Observer - Struktura
 
-<div class="span-v-2"/>
-
-<img src="/img/dp/observer.svg" alt="Observer" class="width-60 center">
+<img src="/img/gof/Observer.excalidraw.svg" alt="Observer" class="width-70 center">
 
 ---
 
@@ -439,11 +435,19 @@ background: /img/header-bg.svg
 class: white-slide
 ---
 
-# Command - Struktura
+# Command - Problem
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/Command.png" alt="Command" class="width-70 center">
+<img src="/img/gof/Command-Before.excalidraw.svg" alt="Command Before" class="width-50 center"> 
+
+---
+class: white-slide
+---
+
+# Command - Struktura
+
+<img src="/img/gof/Command.excalidraw.svg" alt="Command" class="width-70 center">
 
 ---
 
@@ -515,7 +519,7 @@ class: white-slide
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/Memento.png" alt="Memento" class="width-70 center">
+<img src="/img/gof/Memento.excalidraw.svg" alt="Memento" class="width-80 center">
 
 ---
 
@@ -554,9 +558,7 @@ class: white-slide
 
 # Mediator - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Mediator.png" alt="Mediator" class="width-60 center">
+<img src="/img/gof/Mediator.excalidraw.svg" alt="Mediator" class="width-60 center">
 
 ---
 
