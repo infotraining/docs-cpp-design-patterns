@@ -272,8 +272,6 @@ class: white-slide
 
 <img src="/img/gof/Decorator-Objects.excalidraw.svg" alt="Decorator - Structure" class="width-70 center"/>
 
-
-
 ---
 
 # Decorator - Consequences [1]

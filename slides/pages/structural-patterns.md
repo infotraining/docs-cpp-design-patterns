@@ -62,9 +62,7 @@ layout: center
 
 # Adapter klas
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Adapter_Klas.png" alt="Adapter klas" class="width-80 center" />
+<img src="/img/gof/Adapter-Class.excalidraw.svg" alt="Adapter klas" class="width-60 center" />
 
 ---
 class: white-slide
@@ -75,7 +73,7 @@ layout: center
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/Adapter_Obiektow.png" alt="Adapter obiektów" class="width-80 center" />
+<img src="/img/gof/Adapter-Object.excalidraw.svg" alt="Adapter obiektów" class="width-70 center" />
 
 ---
 layout: two-cols
@@ -259,15 +257,21 @@ class: white-slide
 
 ---
 class: white-slide
-layout: center
+---
+
+# Decorator - Struktura
+
+<img src="/img/gof/Decorator.excalidraw.svg" alt="Decorator - Structure" class="width-70 center"/>
+
+---
+class: white-slide
 ---
 
 # Decorator - Struktura
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/Decorator.png" alt="Decorator - Struktura" class="width-80 center"/>
-
+<img src="/img/gof/Decorator-Objects.excalidraw.svg" alt="Decorator - Structure" class="width-70 center"/>
 ---
 
 # Decorator - konsekwencje [1]
@@ -502,9 +506,7 @@ class: white-slide
 
 # Proxy - Scenariusz - UML
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/proxy-image-0.svg" alt="Proxy - Scenariusz - UML 1" class="width-90 center"/>
+<img src="/img/gof/Proxy - DocumentEditor - 1.excalidraw.svg" alt="Proxy - Scenariusz - UML 1" class="width-90 center"/>
 
 ---
 class: white-slide
@@ -513,9 +515,7 @@ class: white-slide
 
 # Proxy - Scenariusz - UML
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/proxy-image-1.svg" alt="Proxy - Scenariusz - UML 2" class="width-90 center"/>
+<img src="/img/gof/Proxy - DocumentEditor - 2.excalidraw.svg" alt="Proxy - Scenariusz - UML 2" class="width-90 center"/>
 
 ---
 class: white-slide
@@ -523,8 +523,6 @@ class: white-slide
 ---
 
 # Proxy - Scenariusz - UML
-
-<div class="span-v-4"/>
 
 <img src="/img/dp/Proxy_Image_Sekwencja.png" alt="Proxy - Scenariusz - UML 3" class="width-40 center"/>
 
@@ -551,9 +549,7 @@ class: white-slide
 
 # Proxy - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Proxy.png" alt="Proxy - Struktura" class="width-80 center"/>
+<img src="/img/gof/Proxy.excalidraw.svg" alt="Proxy - Struktura" class="width-80 center"/>
 
 ---
 class: white-slide
@@ -566,7 +562,7 @@ class: white-slide
 
 <div class="span-v-4"/>
 
-<img src="/img/dp/proxy-collaboration.svg" alt="Proxy - Współpraca" class="width-60 center"/>
+<img src="/img/gof/Proxy - Objects.excalidraw.svg" alt="Proxy - Współpraca" class="width-60 center"/>
 
 ---
 
@@ -706,12 +702,27 @@ layout: center
 Projekt z użyciem dziedziczenia w celu uwzględnienia wielu implementacji
 
 </div>
+
 ---
 class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/Bridge_DrawingAPI_Before.png" alt="Bridge - DrawingAPI Before" class="width-50 center"/>
+<img src="/img/gof/Bridge - Shapes - 1.excalidraw.svg" alt="Bridge - DrawingAPI Before" class="center"/>
+
+---
+class: white-slide
+layout: center
+---
+
+<img src="/img/gof/Bridge - Shapes - 2.excalidraw.svg" alt="Bridge - DrawingAPI Before" class="center"/>
+
+---
+class: white-slide
+layout: center
+---
+
+<img src="/img/gof/Bridge - Shapes - 3.excalidraw.svg" alt="Bridge - DrawingAPI Before" class="center"/>
 
 ---
 layout: center
@@ -736,9 +747,7 @@ class: white-slide
 
 # Bridge - Structure
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Bridge.png" alt="Bridge - Structure" class="width-70 center"/>
+<img src="/img/gof/Bridge.excalidraw.svg" alt="Bridge - Structure" class="width-90 center"/>
 
 ---
 
@@ -900,9 +909,7 @@ class: white-slide
 
 # Flyweight - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Flyweight.png" alt="Flyweight - Struktura" class="width-70 center"/>
+<img src="/img/gof/Flyweight.excalidraw.svg" alt="Flyweight - Struktura" class="width-80 center"/>
 
 ---
 
