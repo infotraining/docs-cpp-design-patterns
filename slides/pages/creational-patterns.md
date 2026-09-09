@@ -692,9 +692,7 @@ class: white-slide
 
 # Prototype - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Prototype.png" alt="Prototype" class="width-60 center"/>
+<img src="/img/gof/Prototype.excalidraw.svg" alt="Prototype" class="width-70 center"/>
 
 ---
 
@@ -825,20 +823,16 @@ layout: center
 
 # Builder - Struktura
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Builder.png" alt="Builder" class="width-70 center"/>
+<img src="/img/gof/Builder.excalidraw.svg" alt="Builder" class="width-70 center"/>
 
 ---
 class: white-slide
 layout: center
 ---
 
-# Builder - Współpraca
+<h2 style="font-size: 1.1em; margin-bottom: 0.3em !important;">Builder - Współpraca</h2>
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Builder_dgr_sekwencji.png" alt="Builder - Współpraca" class="width-60 center"/>
+<img src="/img/gof/Builder-Sequence.excalidraw.svg" alt="Builder - Współpraca" class="width-40 center"/>
 
 ---
 
