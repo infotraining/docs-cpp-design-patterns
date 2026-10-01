@@ -3,6 +3,7 @@ theme: seriph
 title: Wzorce projektowe w C++
 class: text-center
 highlighter: shiki
+lineNumbers: true
 shikiSetup: |
   import { defineShikiSetup } from '@slidev/types'
 drawings:

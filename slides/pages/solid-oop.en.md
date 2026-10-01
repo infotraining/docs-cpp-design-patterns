@@ -1,10 +1,31 @@
-# OOP Fundamentals
+# Four Tenets of OOP
 
 * Abstraction
 * Encapsulation
 * Polymorphism
 * Composition & inheritance
   * Code reuse
+
+<!-- Four Tenets of OOP 
+
+Abstraction: Focusing on what an object does, not how it does it.
+ * Hide complexity behind a simple interface
+ * Provide meaningful abstractions (interfaces) to clients
+
+Encapsulation: Bundling the data & behavior (the methods that operate on the data) within a single object, and restricting access to some of the object's components.
+  * Provides controlled access to the object's data through methods
+  * Protects the internal state of the object from unintended interference
+  * Expose a public interface for controlled interaction with the object's data
+
+Polymorphism: Different objects can be used through the same interface
+  * Enables code to work with objects of different types through a common interface
+  * Supports code extensibility and flexibility by allowing new types to be introduced without modifying existing code
+
+Composition & Inheritance: Mechanisms for code reuse and establishing relationships between classes.
+  * Composition: Building complex objects by combining simpler ones
+  * Inheritance: Creating new classes based on existing ones, inheriting their behavior and attributes, extending behavior
+
+-->
 
 ---
 
@@ -49,46 +70,46 @@ class: white-slide
 
 ## Abstract Class - Code
 
-```cpp
-    class Shape {
-        int x_, y_;
-    public:
-        Shape(int x = 0, int y = 0) : x_{x}, y_{y}
-        {}
+```cpp {all|2}
+class Shape {
+    int x_, y_;
+public:
+    Shape(int x = 0, int y = 0) : x_{x}, y_{y}
+    {}
 
-        virtual ~Shape() = default;
+    virtual ~Shape() = default;
 
-        virtual void move(int dx, int dy) {
-            x_ += dx;
-            y_ += dy;
-        }
+    virtual void move(int dx, int dy) {
+        x_ += dx;
+        y_ += dy;
+    }
 
-        virtual void draw() const = 0;
-    };
+    virtual void draw() const = 0;
+};
 ```
 
 ---
 
 ### Interface Extraction
 
-```cpp
-    class Shape {
-    public:
-        virtual ~Shape() = default;
+```cpp {all|1-7|9-17}
+class Shape {
+public:
+    virtual ~Shape() = default;
 
-        virtual void move(int dx, int dy)  = 0;
-        virtual void draw() const = 0;
-    };
+    virtual void move(int dx, int dy)  = 0;
+    virtual void draw() const = 0;
+};
 
-    class ShapeBase : public Shape {
-        Point coord_;
-    public:
-        void move(int dx, int dy)  override
-        {
-           coord_.x += dx;
-           coord_.y += dy;
-        }
-    };
+class ShapeBase : public Shape {
+    Point coord_;
+public:
+    void move(int dx, int dy)  override
+    {
+       coord_.x += dx;
+       coord_.y += dy;
+    }
+};
 ```
 
 ---
@@ -103,7 +124,8 @@ class: white-slide
 # Polymorphism
 
 * Providing the same interface for multiple objects of different types
-* Allows one object to be replaced by another at runtime when they have identical interfaces
+* It's all about substitutability
+* Allows one object to be replaced by another
 
 ---
 
@@ -116,9 +138,17 @@ class: white-slide
 
 # Dynamic Polymorphism
 
-* The implementation is bound to the call while the program is running - late binding
-    * public inheritance and overriding methods from a base class
-    * duck typing (e.g. Python)
+<v-clicks>
+
+* Allows one object to be replaced by another at runtime as long as both share the same interface
+* The decision which member function to call is made dynamically through **virtual dispatch** (vtable)
+* Uses public inheritance and overriding methods from a base class 
+* Alternative takes
+  * restricted polymorphism using `std::variant`
+  * duck typing (like in Python)
+    * polymorphic wrappers using type erasure (like `std::function`)
+    * `std::protocol<I>` and `std::protocol_view<I>` proposal for C++29 (v-tables are generated using reflection)
+</v-clicks>
 
 ---
 
@@ -329,13 +359,18 @@ logger2.log("hello, world!");
 
 # Inheritance
 
+* Implementation inheritance
+* Interface inheritance
+
 ---
 
 ## Implementation Inheritance
 
-* Defines one object's implementation using another object's implementation
-* A mechanism for sharing code
-* C++: private inheritance
+* Derived class inherits data members and concrete methods from the base class
+* No polymorphism required
+* No virtual functions involved
+* A mechanism for **code reuse**
+* C++ - **private inheritance**
 
 ---
 
@@ -370,8 +405,9 @@ logger2.log("hello, world!");
 
 ## Interface Inheritance
 
-* Defines when one object can be used instead of another
-* C++: public inheritance from a class with (pure) virtual member functions
+* Means inheriting only the **contract** — the set of functions a type must implement — without inheriting any concrete behavior
+* Defines when one object can be used instead of another - enforces **substitutability**
+* C++ - **public inheritance** from a class with **pure-virtual member functions**
 
 ---
 
@@ -409,33 +445,42 @@ void draw_shapes(const std::vector<std::unique_ptr<Shape>>& shapes)
 
 ---
 
-# Inheritance - Disadvantages (?/!)
+## Typical Inheritance
 
-* Violates encapsulation
-    - ``protected`` fields allow a derived type's implementation to depend on details of the base type's implementation
-* Is static
-    - behavior (implementation) is tied to the type
+* Has hybrid form
+* Combines both implementation and interface inheritance
 
 ---
 
-# OOP Tip #1
+# Inheritance - Disadvantages (?/!)
 
-Program to an interface, not an implementation!
+<v-clicks depth=2>
+
+* Can lead to **tight coupling** between base and derived classes 
+  * Changes in the base class can have unintended consequences on derived classes
+  * Violates encapsulation
+    - `protected` fields allow a derived type's implementation to depend on details of the base type's implementation
+* Is static - **behavior is fixed** at compile time
+    - A new behavior (implementation) is tied to the type that relies on a base class
+    - Cannot easily change behavior at runtime
+    - Inheritance hard‑codes behavior into the type system
+
+</v-clicks>
 
 ---
 
 # Composition
 
-* Is defined dynamically (at runtime)
+<v-clicks>
+
+* Composition means building **complex objects by combining simpler objects**.
+* Is **defined dynamically** (at runtime) - you can change behavior at runtime by swapping components.
 * Cannot violate encapsulation
-* Allows the creation of types that comply with SRP
+* Allows the creation of types that comply with **SRP** - leads to cohesive and maintainable code
+* Each component is independent and replaceable
 
----
-
-# OOP Tip #2
-
-Favor object composition over class inheritance!
-
+</v-clicks>
+ 
 ---
 
 # Delegation
@@ -503,10 +548,21 @@ Delegation enables <span v-mark.underline.green>dynamic composition of behavior 
 # Attributes of Good OOP Design
 
 * Good object-oriented designs:
-    - Should be reusable
-    - Should be easy to extend
-    - Should be easy to maintain and modify
-    - Should be easy to test
+
+  - Should be reusable
+  - Should be easy to extend
+  - Should be easy to maintain and modify
+  - Should be easy to test
+
+---
+
+# Tips for Good OOP Design
+
+- Prefer composition over inheritance
+- Program to interfaces, not implementations
+- Keep classes and methods small and focused
+- Encapsulate what varies
+- Strive for high cohesion and low coupling
 
 ---
 layout: cover
@@ -537,7 +593,8 @@ layout: center
 
 # Single Responsibility Principle
 
-* every object in the code should have only one responsibility, and all of its services should focus on fulfilling it
+* A class should be responsible for **one thing**, one well‑defined aspect of the system
+* SRP is about **cohesion**, **clarity**, and **maintainability** of classes
 
 ---
 class: white-slide
@@ -556,76 +613,129 @@ theme: image
 layout: center
 ---
 
-![SRP](/img/solid/srp.svg)
+<img src="/img/solid/SOLID SRP - Before.excalidraw - 1.svg" alt="SRP Before" class="img-lg center" />
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+<img src="/img/solid/SOLID SRP - Before.excalidraw - 2.svg" alt="SRP After" class="img-lg center" />
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+<div class="slogan">
+How to refactor a class to adhere to SRP?
+</div>
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+<img src="/img/solid/SOLID SRP - After.excalidraw.svg" alt="SRP Refactored" class="center" />
+
+---
+
+
+## Why SRP matters
+
+<v-clicks>
+
+* Less coupling
+* Easier to understand and maintain
+* Easier to test
+
+</v-clicks>
 
 ---
 
 # Open-Closed Principle
 
-<v-clicks>
+<v-clicks depth="2">
 
-* Classes should be <span v-mark.underline.green>open for extension</span> and <span v-mark.underline.red>closed for modification</span>.
-
+* A module (class, function, component) should be
+  * <span v-mark.underline.green>open for extension</span> and
+  * <span v-mark.underline.red>closed for modification</span>.
+* OCP is about protecting stable code while still allowing the system to grow.
+  
 </v-clicks>
 
 ---
 class: white-slide
----
-
-<center>
-
-## Violating the OCP
-
-</center>
-
-<v-clicks>
-
-<div class="text-code-08">
-```cpp
-struct Server
-{
-    void run() { /*implementation*/ }
-}
-
-class Client
-{
-    Server server_;
-public:
-    void use()
-    {
-        server_.run();
-    }
-};
-```
-</div>
-
-<div class="span-v-2"/>
-<img src="/img/solid/ocp-before.png" alt="OCP Before" class="width-50 center" />
-<div class="span-v-2"/>
-
-</v-clicks>
-
----
-class: white-slide
+theme: image
 layout: center
 ---
 
-## Solution = Interface
+## Violation of the Open-Closed Principle
+
+<img src="/img/solid/SOLID OCP - Db - Before.excalidraw.svg" alt="OCP Before" class="img-md center" />
+
+---
+
+## What violates the Open-Closed Principle?
+
+* Big `switch` or `if(type)` statements
+* Hard‑coded behavior
+* Modifying existing classes every time a new case appears
+* Deep inheritance hierarchies that require touching old code
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+<div class="slogan">
+How to refactor a class to adhere to OCP?
+</div>
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+<img src="/img/solid/SOLID OCP - Db - After.excalidraw.svg" alt="OCP After" class="img-lg center" />
+
+---
+class: white-slide
+theme: image
+layout: center
+---
+
+## Solution == Interface
 
 <center>
 <div class="span-v-4"/>
-<img src="/img/solid/ocp-after.png" alt="OCP After" class="width-40 center" />
+<img src="/img/solid/SOLID OCP.excalidraw.svg" alt="OCP After" class="width-60 center" />
 </center>
+
+---
+
+## Why OCP matters?
+
+* **Stability** — tested code stays untouched.
+* **Scalability** — adding the 10th variant is as safe as adding the 2nd.
+* **Parallel development** — teams can add features without merge conflicts.
+* **Lower regression risk** — only new classes need testing.
 
 ---
 
 # Liskov Substitution Principle
 
-<v-click>
+<v-clicks>
 
-* It must be possible to substitute derived types for their base types
+* A **subclass** must be usable anywhere its base class is expected — **without breaking correctness**.
+* The core idea: subtypes must preserve the behavior (the contract) of their supertypes.
 
-</v-click>
+</v-clicks>
 
 ---
 class: white-slide
@@ -642,22 +752,79 @@ can be replaced with instances of type <span style="color: #dd2222">S</span> wit
 
 ## Design by contract
 
+<v-clicks>
+
 * Pre-conditions cannot be strengthened in a subtype
+  * A subclass cannot demand more from the caller than the base class.
 * Post-conditions cannot be weakened in a subtype
+  * A subclass cannot guarantee less than the base class promises.
 * Invariants of the supertype must be preserved in a subtype
+
+</v-clicks>
 
 ---
 class: white-slide
-layout: center
 ---
 
 ## Violating the LSP
 
-<span class="span-v-4"/>
+<img src="/img/solid/SOLID LSP - Before.excalidraw - 1.svg" class="width-80 center" />
 
-<v-click>
-<img src="/img/solid/lsp.svg" alt="LSP Before" class="img-lg" />
-</v-click>
+---
+class: white-slide
+---
+
+## Violating the LSP
+
+
+<img src="/img/solid/SOLID LSP - Before.excalidraw - 2.svg" class="width-80 center" />
+
+---
+
+## Violating the LSP
+
+* Example of LSP violation: testing a Square as a Rectangle
+
+```c++ {all|2-3} 
+void test_rectangle_area(Rectangle& r) {
+    r.set_width(10);
+    r.set_height(20);
+    assert(r.area() == 10 * 20); // should be 200
+}
+
+Rectangle r;
+test_rectangle_area(r);  // should pass
+
+Square sq;
+test_rectangle_area(sq); // assertion will fail because Square violates LSP
+```
+---
+
+## Refactored to LSP
+
+```c++
+class Square 
+{
+    Rectangle rect;  // use composition instead of inheritance
+public:
+    void set_side(int side) {
+        rect.set_width(side);
+        rect.set_height(side);
+    }
+
+    int area() const {
+        return rect.area(); // delegation to the composed Rectangle object
+    }
+}
+```
+
+---
+
+## How to design for LSP
+
+* Keep base class contracts clear and minimal
+* Ensure subclasses only extend, never contradict behavior
+* Avoid inheritance when behavior diverges → use composition or interfaces instead
 
 ---
 
@@ -666,30 +833,39 @@ layout: center
 <v-click>
 
 * A client should not be forced to <span v-mark.underline.green>depend on methods it does not use.</span>
+* It’s about small, focused interfaces instead of large, “fat” ones.
 
 </v-click>
 
 ---
 class: white-slide
-layout: center
 ---
 
 ## Violating the ISP
 
 <span class="span-v-4"/>
 
-<img src="/img/solid/ISP-Before.svg" alt="ISP Before" class="width-80 center" />
+<img src="/img/solid/SOLID ISP - Before.excalidraw.svg" alt="ISP Before" class="width-70 center" />
 
 ---
 class: white-slide
-layout: center
 ---
 
-## ISP - Better Solution
+## Refactored to ISP
 
 <span class="span-v-4"/>
 
-<img src="/img/solid/ISP-After.svg" alt="ISP After" class="width-80 center" />
+<img src="/img/solid/SOLID ISP - After.excalidraw.svg" alt="ISP After" class="width-90 center" />
+
+---
+
+## Why ISP Matters?
+
+* Encourages the creation of focused, **cohesive interfaces**
+  * Splits large interfaces by responsibility
+  * One interface per role, not one per domain
+* Client depends only on the methods it actually uses
+* Reduces the impact of changes in one part of the system on other parts
 
 ---
 
@@ -705,17 +881,42 @@ layout: center
 
 ## Violating the DIP
 
-<span class="span-v-4"/>
-
-<img src="/img/solid/dip-before.png" alt="DIP Before" class="width-50 center" />
+<img src="/img/solid/SOLID DIP - Before.excalidraw - 1.svg" alt="DIP Before" class="width-80 center" />
 
 ---
 class: white-slide
 layout: center
 ---
 
-## DIP
+## Violating the DIP
 
-<span class="span-v-4"/>
+<img src="/img/solid/SOLID DIP - Before.excalidraw - 2.svg" alt="DIP Before" class="width-80 center" />
 
-<img src="/img/solid/dip-after.png" alt="DIP After" class="width-80 center" />
+
+---
+class: white-slide
+layout: center
+---
+
+## Refactored to DIP
+
+<img src="/img/solid/SOLID DIP - After.excalidraw - 1.svg" alt="DIP After" class="width-90 center" />
+
+---
+class: white-slide
+layout: center
+---
+
+## Refactored to DIP
+
+<img src="/img/solid/SOLID DIP - After.excalidraw - 2.svg" alt="DIP After" class="width-90 center" />
+
+---
+
+## Why DIP Matters?
+
+* Promotes decoupling between high-level and low-level modules
+* Makes the system more flexible and easier to maintain
+* Encourages the use of abstractions, leading to more reusable code
+* Reduces the risk of changes in low-level modules affecting high-level modules
+* Simplifies testability - allows to use mock implementations for dependencies

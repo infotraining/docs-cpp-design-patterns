@@ -3,6 +3,7 @@ theme: seriph
 title: Design Patterns in C++
 class: text-center
 highlighter: shiki
+lineNumbers: true
 shikiSetup: |
   import { defineShikiSetup } from '@slidev/types'
 drawings:
@@ -15,7 +16,7 @@ fonts:
   serif: 'Fira Sans'
   mono: 'Jetbrains Mono' 
 defaults:
-   layout: default
+  layout: default
 layout: cover
 background: /img/bg-blue-1.jpg
 ---
