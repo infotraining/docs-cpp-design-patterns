@@ -11,7 +11,7 @@ layout: center
 
 <div class="text-xl">
 
-> A pattern describes a **problem** that occurs repeatedly in a given context, presents the **core solution** to that problem, and does so in a way that **allows the solution to be reused** for every instance of the problem without repeating the same design work
+> Each **pattern** describes a **problem** which occurs over and over again in our environment, and then describes the **core of the solution** to that problem.
 >
 > *— Christopher Alexander - "A Pattern Language"*
 
@@ -32,26 +32,27 @@ background-size: 20em 70%
 
 ---
 
-# Design Patterns - Advantages
+# Design Patterns in Software Engineering
 
+* Design Patterns are **reusable solutions** to common software design problems
 * Have proven themselves in many real-world object-oriented applications
 * Show how to build complete systems with the characteristics of good, SOLID object-oriented designs
-* Do not provide ready-made code, but general ways to solve problems that arise during the design phase
+* Do not provide ready-made code, but provide **blueprints** for solving recurring design problems
 
 ---
 
 # Design Patterns - Advantages
 
-* Patterns provide a kind of **common language** that can maximize communication efficiency among team members
-* Most patterns allow certain parts of a system to be modified completely independently of the remaining elements
+* Patterns provide a kind of **shared vocabulary** that can maximize communication efficiency among team members
+* Patterns improve maintainability, scalability, and testability
 * Patterns usually address situations in which specific changes must be made to software, allowing frequently changing elements to be encapsulated
 
 ---
 
 # Design Pattern
 
-* A pattern provides an abstract description of a design problem and how a general arrangement of elements (classes and objects) solves that problem.
-
+* A pattern describes an **abstract solution** to a recurring design problem, including how a general arrangement of elements (classes and objects) addresses it.
+* It **describes interactions and structures** rather than code, providing a shared vocabulary that improves communication and supports maintainability and scalability.
 ---
 
 # Design Pattern
