@@ -653,10 +653,9 @@ background: /img/header-bg.svg
 
 # Prototype
 
-* Intent
-    - specifies the kinds of objects to create using a prototype instance
-    - creates new objects by copying the prototype
-    - allows clients to create objects whose types are unknown to them
+* Prototype lets you create new objects by copying (cloning) a prototypical instance, avoiding costly construction and avoiding compile‑time dependency on concrete classes.
+
+* The key operation is `clone()`, implemented by each concrete prototype.
 
 ---
 
@@ -789,14 +788,76 @@ public:
 
 ---
 
+# Prototype in C++26
+
+* C++26 introduces `std::polymorphic<T>` that simplifies the implementation of the Prototype pattern by providing a built-in mechanism for cloning polymorphic objects
+* It eliminates the need to manually implement the `clone()` method in each concrete class
+* Instead, the cloning behavior is automatically provided by `std::polymorphic<T>` wrapper - is uses copy-constructors
+
+--- 
+
+# Prototype in C++26
+
+<div class="text-code-08">
+
+```c++
+struct Shape {
+    virtual void draw() const = 0;
+    virtual ~Shape() = default;
+};
+
+class Rectangle : public Shape {
+public:
+    Rectangle(int width, int height);
+    void draw() const override {
+        // implementation of draw for Rectangle
+    }
+};
+
+class Square : public Shape {
+public:
+    explicit Square(int side)
+    void draw() const override {
+        // implementation of draw for Square
+    }
+};
+```
+
+</div>
+
+---
+
+# Prototype in C++26
+
+[Compiler Explorer](https://godbolt.org/z/zbf13PW3P)
+
+```c++
+#include <memory>
+
+std::polymorphic<Shape> shp(Rectangle(100, 200));
+shp->draw();
+
+auto shp_copy = shp; // copies Rectangle instance
+shp_copy->draw();    // draws Rectangle
+
+shp = std::polymorphic<Shape>(Square(400)); // assigns a new Square instance to shp
+shp->draw(); // draws Square
+
+shp_copy = shp;    // copies the Square instance
+shp_copy->draw();  // draws Square
+```
+
+---
+
 # Prototype - Consequences
 
-* Dynamically add and remove products at runtime
-    - makes it easier to add new concrete products by registering prototype instances with the client
-    - a more flexible solution than factories
-    - fewer subclasses
-* Makes it possible to specify new prototype objects by varying their structure
-    - complex structures defined at runtime can also be cloned
+* Allows dynamically add and remove products at runtime
+  * makes it easier to register new concrete prototypes with the client
+  * provides a more flexible solution than factories
+  * reduces the need for many subclasses
+
+* Makes it possible to define new prototype objects by varying their structure
+  * complex structures can be copied/cloned at runtime
 
 ---
 
@@ -823,9 +884,12 @@ background: /img/header-bg.svg
 
 ---
 
-# Builder - Intent
+# Builder
 
-* Separates the construction of a complex object from its representation, allowing different representations to be created by the same construction process
+* Separates **how an object is built** from **what the object is**, allowing you to construct complex objects through a controlled, fluent, step‑by‑step process — without telescoping constructors or giant configuration structs
+
+* Allows to create in the same construction process different representations of a complex object
+
 * Defines the steps for creating a product object
     - these steps are configurable from outside (which distinguishes Builder from object factories)
 
@@ -847,23 +911,27 @@ background: /img/header-bg.svg
 
 ---
 class: white-slide
-layout: center
 ---
 
 # Builder - Structure
 
-<div class="span-v-2"/>
+<div class="flex h-[80%] items-center justify-center">
 
 <img src="/img/gof/Builder.excalidraw.svg" alt="Builder" class="width-70 center"/>
 
+</div>
+
 ---
 class: white-slide
-layout: center
 ---
 
-# Builder - Collaboration
+<!-- # Builder - Collaboration -->
 
-<img src="/img/gof/Builder-Sequence.excalidraw.svg" alt="Builder - Collaboration" class="width-30 center"/>
+<div class="flex h-[100%] items-center justify-center">
+
+<img src="/img/gof/Builder-Sequence.excalidraw.svg" alt="Builder - Collaboration" class="center" style="max-height: 100%;"/>
+
+</div>
 
 ---
 

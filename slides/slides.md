@@ -25,11 +25,6 @@ background: /img/bg-blue-1.jpg
 
 Krystian Piękoś
 
-<div class="logo">
-
-![logo](/img/logo.png)
-
-</div>
 
 ---
 layout: default

@@ -4,6 +4,27 @@
   /* font-size: 1em; */
 }
 
+.slidev-layout::before {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 12rem;
+  height: 6rem;
+  background-image: url('/img/logo-grey.svg');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .slidev-layout::before {
+  background-image: url('/img/logo-grey.svg');
+}
+
+
 strong {
   color: gold;
 }
