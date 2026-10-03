@@ -28,24 +28,26 @@ layout: center
 # Creational Patterns - Introduction
 
 * Abstract the object creation process
-* Facilitate building systems independent of how their objects are created, assembled, and represented
-* Encapsulate knowledge of which concrete classes the system uses and how instances of those classes are created, configured, and combined
+
+* Facilitate building systems independent of how their objects are created, composed, and represented
+
+* They **hide complexity**, **encapsulate creation logic**, and **reduce coupling** between client code and concrete classes
 
 ---
 
 # Creational Patterns - Introduction
 
-* Make it possible to configure a system with product objects that differ significantly in structure and functionality
-    - Static configuration (at compile time)
-    - Dynamic configuration (at runtime)
+* Allow to configure a system with objects (called **products**) that differ significantly in structure and functionality
 
----
-layout: center
+* Configuration can be either:
+  - static - at compile time
+  - dynamic - at runtime
+
 ---
 
 # Factories
 
-<div class="text-xl">
+<div v-click class="text-xl">
 
 > Prefer loose coupling between classes
 >
@@ -57,74 +59,86 @@ layout: center
 
 Code that violates this principle:
 
-<div class="text-code-07">
+<div class="text-code-08">
 
-```cpp
-class MusicApp
-{
+```cpp {all|4|6-19|all}
+class MusicApp {
 public:
-    //...
-
-    void play(const std::string& track_title)
-    {
-        // creation of the object
-        SpotifyService music_service("spotify_user", "rjdaslf276%2", 45);
+    void play(const std::string& track_title) {
+        SpotifyService music_service("spotify_user", "rjdaslf276%2", 45); // creation of the object
 
         // usage of the object
-        std::optional<Track> track = music_service.get_track(track_title);
-
+        if (!music_service.is_track_available(track_title)) {
+            //...
+            return;
+        }
+        else {
+            std::expected<Track, std::error_code> track = music_service.get_track(track_title);
+            if (track) {
+                // proceed with playing the track
+            } 
+            else {
+                // handle the error
+            }
+        }
     }
-
-    //...
 };
 ```
 </div>
 
+---
 
-<div class="text-09">
+# Consequences of direct object creation
+
 <v-clicks>
 
 * Classes are strongly coupled (**strong coupling**)
+  * which makes the code less flexible and harder to maintain
+
 * The ``MusicApp`` class is difficult to unit test
 
 </v-clicks>
-</div>
-
 
 ---
 
 # Factories
 
 * To create an object, we must know its exact type
+  
 * Sometimes, however:
+    
+    <v-clicks>
+    
     - We want to leave that precise knowledge to someone else
     - We have the object type as an identifier, such as a `std::string`
-    - The type of another object determines the type of the object being created
+    - The type of another object determines the type of the object we are creating
+    
+    </v-clicks>
 
 ---
 layout: cover
 background: /img/header-bg.svg 
 ---
+
 # Factory Method
 
 ---
 
 # Factory Method
 
-* Intent
-    - defines an interface for creating objects, while delegating responsibility for object creation to derived classes
-    - uses inheritance to let derived classes decide which class of object is created
+* Defines an interface for creating an object, letting subclasses decide which concrete class to instantiate.
+* Key idea: delegate the responsibility of object creation to subclasses
 
 ---
 
 # Factory Method - Scenario
 
-How can we improve the following code?
+* How can we improve the following code?
 
 <div class="text-code-08">
 
-```cpp
-class MusicApp
+```cpp {all|8-9} 
+class MusicAp
 {
 public:
     //...
@@ -135,11 +149,11 @@ public:
         SpotifyService music_service("spotify_user", "rjdaslf276%2", 45);
 
         // usage of the object
-        std::optional<Track> track = music_service.get_track(track_title);
-
+        if (!music_service.is_track_available(track_title)) {
+            //...
+            return;
+        }
     }
-
-    //...
 };
 ```
 
@@ -155,7 +169,9 @@ public:
 class MusicService
 {
 public:
-    virtual std::optional<Track> get_track(const std::string& title) = 0;
+    virtual std::string service_name() const = 0;
+    virtual bool is_track_available(const std::string &title) = 0;
+    virtual std::expected<Track, std::error_code> get_track(const std::string &title) = 0;
     virtual ~MusicService() = default;
 };
 ```
@@ -209,37 +225,35 @@ void play(const std::string& track_title)
         music_service_creator_->create_music_service();
 
     // usage of the object
-    std::optional<Track> track = music_service->get_track(track_title);
-
-    //...
+    if (!music_service.is_track_available(track_title)) {
+        //...
+        return;
+    }
 }
 ```
 
 ---
 
-# Factory Method - Context
+# Factory Method - Context / Problem
 
-* We want to introduce new functionality by writing a new class and creating an instance of that class
+* A class cannot anticipate the exact type of objects it must create
 
----
+* We want to delegate the responsibility of creating objects to a separate object/class
+  * instead of choosing the concrete class directly we want to call a **factory method**
+ 
+* You want to follow the Open–Closed Principle
+  * Adding new product types should not require editing a giant `switch` or `if` chain
 
-# Factory Method - Problem
-
-* We want to create instances of concrete classes through an interface
-* A class cannot anticipate the type of object that must be created
 * Information about the type of object to create is available only at runtime
 
 ---
 class: white-slide
-layout: center
 ---
 
 # Factory Method - Structure
 
-<div class="span-v-4"/>
-
-<img src="/img/dp/Factory.png" alt="Factory Method" class="width-80 center"/>
-
+<div class="flex h-[80%] items-center justify-center">
+  <img src="/img/dp/Factory.png" alt="Factory Method" class="width-80"/></div>
 
 ---
 
@@ -367,18 +381,17 @@ background: /img/header-bg.svg
 
 # Abstract Factory
 
-* Intent
-    - provides an interface for creating families of related or dependent objects without specifying their concrete classes
+* Abstract Factory appears when a system must work with **families of related objects** without knowing their concrete types.
 
 ---
 
 # Abstract Factory - Scenario
 
-* We want to write an application that works with multiple RDBMSs (e.g. Oracle, SQL Server, etc.)
+* We want to write an application that works with multiple RDBMSs (e.g. Oracle, MySQL, etc.)
 * We define basic abstract classes that work together:
-    - ``Connection`` – an object that controls the database connection
-    - ``Command`` – an object representing an SQL command
-    - ``Transaction`` – an object representing a transaction
+    - ``DbConnection`` – an object that controls the database connection
+    - ``DbCommand`` – an object representing an SQL command
+    - ``DbTransaction`` – an object representing a transaction
 
 ---
 
@@ -391,28 +404,42 @@ class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/abstract-factory-db-1.png" alt="Abstract Factory - Database - 1" class="width-40 center"/>
+<img src="/img/gof/Abstract Factory DP - DbFactory - 1a.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
 
 ---
 class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/abstract-factory-db-2.png" alt="Abstract Factory - Database - 2" class="width-70 center"/>
+<img src="/img/gof/Abstract Factory DP - DbFactory - 1b.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
 
 ---
 class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/abstract-factory-db-3.png" alt="Abstract Factory - Database - 3" class="width-70 center"/>
+<img src="/img/gof/Abstract Factory DP - DbFactory - 2a.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
 
 ---
 class: white-slide
 layout: center
 ---
 
-<img src="/img/dp/abstract-factory-db-4.png" alt="Abstract Factory - Database - 4" class="width-70 center"/>
+<img src="/img/gof/Abstract Factory DP - DbFactory - 2b.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
+
+---
+class: white-slide
+layout: center
+---
+
+<img src="/img/gof/Abstract Factory DP - DbFactory - 2c.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
+
+---
+class: white-slide
+layout: center
+---
+
+<img src="/img/gof/Abstract Factory DP - DbFactory.excalidraw.svg" alt="Abstract Factory - Database - Excalidraw" class="width-90 center"/>
 
 ---
 

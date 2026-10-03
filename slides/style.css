@@ -28,7 +28,7 @@ em {
 
 /* Base font size for slides */
 .slidev-layout {
-  padding-top: 3.0em;
+  /* padding-top: 3.0em; */
   font-size: 1.2em;
 }
 
@@ -78,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 .slidev-layout p {
   font-size: 1.1em;
   line-height: 1.6;
+  margin-bottom: 0 !important;
 }
 
 /* Light theme styles */
@@ -175,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .slidev-layout ul > li + li {
-  padding-top: 0.6em;
+  /* padding-top: 0.6em; */
 }
 
 .slidev-layout ul > li > ul > li {
