@@ -3,6 +3,7 @@ theme: seriph
 title: Wzorce projektowe w C++
 class: text-center
 highlighter: shiki
+lineNumbers: true
 shikiSetup: |
   import { defineShikiSetup } from '@slidev/types'
 drawings:
@@ -24,11 +25,6 @@ background: /img/bg-blue-1.jpg
 
 Krystian Piękoś
 
-<div class="logo">
-
-![logo](/img/logo.png)
-
-</div>
 
 ---
 layout: default
